@@ -6,6 +6,8 @@
 
 ## how to test 
 * node test.js -t compress
+* node test.js -t template_content
+* node test.js -t template_file
 
 ## ide
 * vs code or vi 
