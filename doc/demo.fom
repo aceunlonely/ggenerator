@@ -1,0 +1,28 @@
+<FOM>
+    <NODE>
+        <SOURCE>test.js</SOURCE>
+        <TARGET>test/a.js</TARGET>
+        <DATA />
+    </NODE>
+    <NODE>
+        <SOURCE>1/test.fom</SOURCE>
+        <TARGET>test/test.fom</TARGET>
+    </NODE>
+    <NODE>
+        <SOURCE>./test1.py</SOURCE>
+        <TARGET>test2.py</TARGET>
+    </NODE>
+    <NODE>
+        <SOURCE>$d/import.xls</SOURCE>
+	<TARGET>templates/import.xls</TARGET>
+    </NODE>
+    <NODE>
+	<TARGET>del.xls</TARGET>
+	<OPERATE>DELETE</OPERATE>
+    </NODE>
+    <NODE>
+	<SOURCE>orgin.xls</SOURCE>
+	<TARGET>new.xls</TARGET>
+	<OPERATE>RENAME</OPERATE>
+    </NODE>
+</FOM>
