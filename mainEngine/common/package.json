@@ -1,0 +1,14 @@
+{
+  "name": "apporoad-common",
+  "version": "1.0.0",
+  "description": "common methods",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "common"
+  ],
+  "author": "xyliu",
+  "license": "MIT"
+}
