@@ -1,0 +1,30 @@
+{
+  "name": "ggenerator",
+  "version": "1.0.0",
+  "description": "all of gg",
+  "main": "run.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "commander": "^2.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aceunlonely/ggenerator.git"
+  },
+  "keywords": [
+    "gg",
+    "ggenerator"
+  ],
+  "author": "xyliu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aceunlonely/ggenerator/issues"
+  },
+  "homepage": "https://github.com/aceunlonely/ggenerator#readme"
+}

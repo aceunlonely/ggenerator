@@ -4,13 +4,13 @@ var zip =require('./zip-co')
 var unzip =require('./zip-un')
 
 
-exports.zip=function(src,tgt)
+exports.zip=function(src,tgt,achTgt,errFn)
 {
-	zip.run(src,tgt);
+	zip.run(src,tgt,achTgt,errFn);
 };
 
 
-exports.unzip=function(src,tgt,errFn)
+exports.unzip=function(src,tgt)
 {
-	unzip.run(src,tgt,errFn);
+	unzip.run(src,tgt);
 };
