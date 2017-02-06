@@ -1,5 +1,6 @@
 var compress = require('./compress')
 var tempEngine = require('./templateEngine')
+var gu= require('ggenerator-utils')
 var fs = require('fs')
 
 
@@ -42,6 +43,14 @@ exports.test=function (params) {
         case 'template_file':
             tempEngine.renderFile('test/demo002/test.tpl','test/demo002/test.txt',jsonData)
             console.log('succeed')
+            break;
+        case 'fs':
+            gu.delDir('test/demo004/tgt');
+            gu.existsDir('test/demo004/src','test/demo004/tgt',function(){})
+            gu.copyDir('test/demo004/src','test/demo004/tgt');
+            break;
+        case 'fom':
+            
             break;
         default:
         break;

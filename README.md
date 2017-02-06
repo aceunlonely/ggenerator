@@ -8,6 +8,8 @@
 * node test.js -t compress
 * node test.js -t template_content
 * node test.js -t template_file
+* node test.js -t fs
+* node test.js -t fom
 
 ## ide
 * vs code or vi 
