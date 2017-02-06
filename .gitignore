@@ -39,4 +39,4 @@ jspm_packages
 
 
 
-!node_modules/ggenerator-utils
+!/node_modules/ggenerator-utils
