@@ -11,5 +11,8 @@
     "engine"
   ],
   "author": "xyliu",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "xml2js": "^0.4.17"
+  }
 }
