@@ -5,23 +5,21 @@ var gu= require('ggenerator-utils')
 
 
 var endWith=function(str,s){
-  if(s==null||s==""||this.length==0||s.length>this.length)
+  if(s==null||s==""||str.length==0||s.length>str.length)
      return false;
-  if(str.substring(this.length-s.length)==s)
+  if(str.substring(str.length-s.length)==s)
      return true;
   else
      return false;
-  return true;
  }
 
  var startWith=function(str,s){
-  if(s==null||s==""||this.length==0||s.length>this.length)
+  if(s==null||s==""||str.length==0||s.length>str.length)
    return false;
   if(str.substr(0,s.length)==s)
      return true;
   else
      return false;
-  return true;
  }
 
 
@@ -120,7 +118,8 @@ var exe =function(fom,env,templateEngine,renderJson){
                 }
                 else
                 {
-                    fs.writeFile(tgt,fs.readFileSync(src));
+                    fs.writeFileSync(tgt,fs.readFileSync(src));
+                    //fs.writeFile(tgt,fs.readFileSync(src));
                 }
                 break;
             case 'D':
@@ -148,12 +147,11 @@ var exe =function(fom,env,templateEngine,renderJson){
                 }
                 else
                 {
-                    fs.rename(src,tgt)
+                    fs.renameSync(src,tgt)
                 }
                 break;
             default:
                 throw new Error("fom:unknow operate: " + op)
-                break;
 
         }
 

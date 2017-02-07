@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <FOM>
     <NODE>
-        <SOURCE>hobbies.md</SOURCE>
-        <TARGET>hobbies.md</TARGET>
-    </NODE>
-    <NODE>
         <SOURCE>gf.fom</SOURCE>
         <TARGET>gf/gf.fom</TARGET>
     </NODE>

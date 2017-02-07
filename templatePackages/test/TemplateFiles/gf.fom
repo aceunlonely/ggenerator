@@ -4,7 +4,7 @@
     <NODE>
 	<SOURCE>gf.txt</SOURCE>
 	<TARGET>${g.name}.txt</TARGET>
-    <DATA>ddata.gf[${index-1}]</DATA>
+    <DATA>ddata.gf[${index}]</DATA>
     </NODE>
     {@/each}
 </FOM>

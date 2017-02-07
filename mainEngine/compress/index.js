@@ -10,7 +10,7 @@ exports.zip=function(src,tgt,achTgt,errFn)
 };
 
 
-exports.unzip=function(src,tgt)
+exports.unzip=function(src,tgt,callback)
 {
-	unzip.run(src,tgt);
+	unzip.run(src,tgt,callback);
 };

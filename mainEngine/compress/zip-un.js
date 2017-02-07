@@ -1,12 +1,12 @@
 var fs =require("fs")
 var unzip=require("unzip")
 
-exports.run=function(orgin,target)
+exports.run=function(orgin,target,callback)
 {
 
-	var steam = fs.createReadStream(orgin)
+	var temp = unzip.Extract({ path: target})
 	
-	
+	if(callback) temp.on('close',callback)
 	//??
-	steam.pipe(unzip.Extract({ path: target}));
+	fs.createReadStream(orgin).pipe(temp);
 };

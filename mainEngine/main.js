@@ -30,9 +30,9 @@ var getTd=function(env){
 }
 
 var endWith=function(str,s){
-  if(s==null||s==""||this.length==0||s.length>this.length)
+  if(s==null||s==""||str.length==0||s.length>str.length)
      return false;
-  if(str.substring(this.length-s.length)==s)
+  if(str.substring(str.length-s.length)==s)
      return true;
   else
      return false;
@@ -106,7 +106,7 @@ var execRenderRecurring = function(workspace,tgt,templateEngine,renderJson){
         if(exists)
         {
             var files = fs.readdirSync(workspace)
-            files.foreach(function(file,index){
+            files.forEach(function(file,index){
                 if(fs.statSync(workspace +'/' + file).isDirectory())
                 {
                     //recurse
@@ -160,15 +160,17 @@ exports.run =function (params) {
              }
 
     //1. unpack dData package
-    compress.unzip(dDataSrcPath,env.dynamicRootPath)
-    //2. read dData json
-     var dDataJson = getTd(env)
-    //3. create real workspace
-    gu.copyDir(path.join(env.templatePackageRootPath,'Workspace'),env.workspace)
-    //4. foreach find fom
-    execFomRecurring(env,tempEngine,dDataJson)
-    //7. recurring render all files to tgt
-    execRenderRecurring(env.workspace,env.tgt,tempEngine,dDataJson)
+    compress.unzip(dDataSrcPath,env.dynamicRootPath,function() {
+        //2. read dData json
+        var dDataJson = getTd(env)
+        //3. create real workspace
+        gu.copyDir(path.join(env.templatePackageRootPath,'Workspace'),env.workspace)
+        //4. foreach find fom
+        execFomRecurring(env,tempEngine,dDataJson)
+        //7. recurring render all files to tgt
+        execRenderRecurring(env.workspace,env.targetPath,tempEngine,dDataJson)
+    })
+    
 }
 
 

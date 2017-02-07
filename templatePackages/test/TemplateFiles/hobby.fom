@@ -4,7 +4,7 @@
     <NODE>
 	<SOURCE>hobby.txt</SOURCE>
 	<TARGET>${h.name}.txt</TARGET>
-    <DATA>ddata.hobbies[${index-1}]</DATA>
+    <DATA>ddata.hobbies[${index}]</DATA>
     </NODE>
     {@/each}
 
