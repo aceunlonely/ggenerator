@@ -36,7 +36,6 @@ var endWith=function(str,s){
      return true;
   else
      return false;
-  return true;
  }
 
 
