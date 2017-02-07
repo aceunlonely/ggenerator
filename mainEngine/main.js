@@ -15,9 +15,9 @@ var parser =  new xml2js.Parser({explicitArray : false, ignoreAttrs : true , asy
 
 //get template object
 var getTd=function(env){
-    var tempTConfig = require(env.templatePackageRootPath +'/Config')
-    var tempDConfig = require(env.dynamicRootPath + '/Config')
-    var tempDData = require(env.dynamicRootPath + '/DataObject')
+    var tempTConfig = require("../"+env.templatePackageRootPath +'/Config')
+    var tempDConfig = require("../"+env.dynamicRootPath + '/Config')
+    var tempDData = require("../"+env.dynamicRootPath + '/DataObject')
     return {
         data : null,
         tConfig :tempTConfig,

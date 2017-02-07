@@ -3,5 +3,10 @@ var unzip=require("unzip")
 
 exports.run=function(orgin,target)
 {
-	fs.createReadStream(orgin).pipe(unzip.Extract({ path: target}));
+
+	var steam = fs.createReadStream(orgin)
+	
+	
+	//??
+	steam.pipe(unzip.Extract({ path: target}));
 };
