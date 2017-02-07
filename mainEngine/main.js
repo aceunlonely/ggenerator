@@ -2,30 +2,174 @@ var compress = require('./compress')
 var tempEngine = require('./templateEngine')
 var gu= require('ggenerator-utils')
 var fs = require('fs')
+var path =require('path')
 var fom= require('./fom')
-
 var config=require('../config')
-
 var xml2js = require('xml2js');
 
 var builder = new xml2js.Builder();  // JSON->xml
-var parser =  new xml2js.Parser({explicitArray : false, ignoreAttrs : true}); 
+var parser =  new xml2js.Parser({explicitArray : false, ignoreAttrs : true , async: false}); 
 
 
 //compress.unzip('d:/test/test.zip','d:/test/test2')
 
+//get template object
+var getTd=function(env){
+    var tempTConfig = require(env.templatePackageRootPath +'/Config')
+    var tempDConfig = require(env.dynamicRootPath + '/Config')
+    var tempDData = require(env.dynamicRootPath + '/DataObject')
+    return {
+        data : null,
+        tConfig :tempTConfig,
+        tc: tempTConfig,
+        dConfig : tempDConfig,
+        dc : tempDConfig,
+        ddata: tempDData ,
+        d : tempDData
+    }
+}
+
+var endWith=function(str,s){
+  if(s==null||s==""||this.length==0||s.length>this.length)
+     return false;
+  if(str.substring(this.length-s.length)==s)
+     return true;
+  else
+     return false;
+  return true;
+ }
+
+
+/**
+ *  递归处理fom
+ */
+var execFomRecurring = function(env,templateEngine,renderJson){
+    if(fs.existsSync(env.workspace))
+    {
+        while(true)
+        {
+            var dirs = new Array();
+            files = fs.readdirSync(env.workspace)
+            var hasFom = false
+            for(var i in files)
+            {
+                var fileName = files[i]
+                var fileStat = fs.statSync(env.workspace +'/' + fileName)
+                if(fileStat.isDirectory())
+                {
+                    dirs.push(fileName)
+                }
+                else
+                {
+                    //find a fom
+                    if(endWith(fileName,'.fom'))
+                    {
+                        var fomXml = fs.readFileSync( path.join(env.workspace,fileName),"utf-8")
+                        //渲染 TE render fom and parse fom
+                        fomXml = templateEngine.renderContent(fomXml,renderJson)
+                        //转换
+                        parser.parseString(fomXml,function (err, result) {
+                            //do fom
+                            fom.run(result,env,templateEngine,renderJson)
+                        })
+                        hasFom =true
+                        //删除该fom文件
+                        fs.unlinkSync(path.join(env.workspace,fileName))
+                        break;
+                    }
+                }
+            }
+            if(hasFom)
+            {
+                continue
+            }
+            while(dirs.length>0)
+            {
+                var dir = dirs.pop()
+                //deep copy env
+                var newEnv = JSON.parse(JSON.stringify(env));
+                //修正workspace
+                newEnv.workspace = path.join(env.workspace,dir)
+                //recurse
+                execFomRecurring(newEnv,templateEngine,renderJson)
+            }
+            break;
+        }
+    }}
+
+/**
+ * 递归渲染文件夹
+ */
+var execRenderRecurring = function(workspace,tgt,templateEngine,renderJson){
+    //asyn to accelerate
+    fs.exists(workspace,function (exists) {
+        if(!fs.existsSync(tgt)){ fs.mkdirSync(tgt)}
+        if(exists)
+        {
+            var files = fs.readdirSync(workspace)
+            files.foreach(function(file,index){
+                if(fs.statSync(workspace +'/' + file).isDirectory())
+                {
+                    //recurse
+                    execRenderRecurring(workspace +'/' + file,tgt + '/' + file,templateEngine,renderJson)
+                }
+                else
+                {
+                    templateEngine.renderFile(workspace +'/' + file,tgt + '/' + file,renderJson)
+                }
+            })
+
+        }
+    })
+}
+
+
 
 exports.run =function (params) {
-    //0. create folder of workplace
-    //1. unpack dData package
-    //2. read dData json
-    //3. create real workspace
-    //4. foreach find fom
-    //5. TE render fom and parse fom
-    //6. do fom
+    var dDataSrcPath = params.dDataPath
+    var tpName = params.templatePackage
+    if(config.isTest)
+    {
+        dDataSrcPath = 'test/demo005/dData.zip'
+        tpName = 'test'
+    }
 
+    //0. create folder of workplace
+    var wp = config.workplace
+    var nwp= path.join(wp,Date.now().toString())
+    fs.mkdirSync(nwp)
+    //dData
+    var dDataPath = path.join(nwp,'dData')
+    //fs.mkdirSync(dDataPath)
+    //temp
+    var tempPath = path.join(nwp,'temp')
+    fs.mkdirSync(tempPath)
+    //tgt
+    var tgtPath=path.join(nwp,'tgt')
+    fs.mkdirSync(tgtPath)
+
+    //combine env
+    var env= {
+            targetPath : tgtPath,   // 目标路径
+            templatePackageRootPath : path.join('templatePackages',tpName),
+            dynamicRootPath : dDataPath,     //动态包解压位置
+
+             refPath: path.join('templatePackages',tpName,'TemplateFiles'),    //引用路径
+             dynamicPath: path.join(dDataPath,'FileCollection'),                       //动态引用路径
+             workspace: tempPath                                               //工作路径
+
+             }
+
+    //1. unpack dData package
+    compress.unzip(dDataSrcPath,env.dynamicRootPath)
+    //2. read dData json
+     var dDataJson = getTd(env)
+    //3. create real workspace
+    gu.copyDir(path.join(env.templatePackageRootPath,'Workspace'),env.workspace)
+    //4. foreach find fom
+    execFomRecurring(env,tempEngine,dDataJson)
     //7. recurring render all files to tgt
-    
+    execRenderRecurring(env.workspace,env.tgt,tempEngine,dDataJson)
 }
 
 
@@ -88,18 +232,37 @@ exports.test=function (params) {
             var xml ='<?xml version="1.0" encoding="UTF-8" ?><FOM><NODE><SOURCE>test.js</SOURCE><TARGET>test/a.js</TARGET></NODE><NODE><SOURCE>1/test.fom</SOURCE><TARGET>test/test.fom</TARGET></NODE></FOM>'
             console.log('before parse\n')
             console.log(xml)
-            
             parser.parseString(xml,function(err,r){
                 console.log('--------------------------------------\n')
                 console.log(JSON.stringify(r))
             })
+            console.log('++++++++++++++++')
             break;
         case 'i':
         case 'init':
             //doback 
             gu.delDir('test/demo004/tgt');
             gu.delDir('test/demo003/workspace')
-            
+            gu.delDir('test/demo1_test')
+            fs.exists('test/test.zip',function(e){ if(e){ fs.unlinkSync('test/test.zip') }})
+            break;
+        case 'require':
+            var test =require('../test/demo006')
+            console.log(test.name)
+            console.log(test.age)
+            break;
+        case 'eval':
+            console.log('name:' + eval("jsonData.name"))
+            console.log('hobbies.length : ' + eval("jsonData.hobbies.length"))
+            break;
+        case 'fatherdir':
+            console.log(path.dirname('dir1/dir2/dir/') + '\n')
+            console.log('dir1/dir2/dir/1.txt \n');
+            console.log(path.dirname('dir1/dir2/dir/1.txt') + '\n')
+            console.log(path.dirname(path.dirname('dir1/dir2/dir/1.txt')) + '\n')
+            console.log(path.dirname(path.dirname(path.dirname('dir1/dir2/dir/1.txt'))) + '\n')
+            console.log(path.dirname(path.dirname(path.dirname(path.dirname('dir1/dir2/dir/1.txt')))) + '\n')
+            console.log(path.dirname(path.dirname(path.dirname(path.dirname(path.dirname('dir1/dir2/dir/1.txt'))))) + '\n')
             break;
         default:
         break;

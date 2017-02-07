@@ -25,8 +25,31 @@ var endWith=function(str,s){
  }
 
 
+ // 获取正确的目标地址
+ var getRigthTgt= function(workspace,tgt){
+    if(startWith(tgt,'../'))
+    {
+        //path.basename
+        var newWorkspace = path.dirname(workspace)
+        if(newWorkspace == '.') throw new  Error('fom:getTgt: dont have ../ :' + workspace + "|" + tgt)
+        
+        //recurse
+        tgt = getRigthTgt(newWorkspace,tgt.substr(3))
+    }
+    else
+    {
+        tgt = path.join(workspace,tgt)
+    }
+    if(!fs.existsSync(path.dirname(tgt)))
+    {
+        fs.mkdirSync(path.dirname(tgt));
+    }
+    return tgt
+ }
 
-exports.run=function(fom,env){
+
+//todo  1、 target support ../  2、render
+var exe =function(fom,env,templateEngine,renderJson){
     //env 环境验证
     if(!env)
     {
@@ -82,18 +105,29 @@ exports.run=function(fom,env){
                 {
                     src = path.join(env.refPath,src)
                 }
-                tgt = path.join(env.workspace,tgt)
+                tgt =  getRigthTgt(env.workspace,tgt)
                 if(!fs.existsSync(path.dirname(tgt)))
                 {
                     fs.mkdirSync(path.dirname(tgt));
                 }
-                fs.writeFile(tgt,fs.readFileSync(src));
+
+                //DATA 情况
+                var data = node["DATA"]
+                if(data)
+                {   
+                    var newJson =eval("renderJson." + data);
+                    templateEngine.renderFile(src,tgt,newJson)
+                }
+                else
+                {
+                    fs.writeFile(tgt,fs.readFileSync(src));
+                }
                 break;
             case 'D':
             case 'DELETE':
                 var tgt=node["TARGET"] || node["T"]
                 if(!tgt) throw new Error("fom: when delete tgt is not nullable ")
-                tgt = path.join(env.workspace,tgt)
+                tgt =getRigthTgt(env.workspace,tgt) //path.join(env.workspace,tgt)
                 if(fs.existsSync(tgt)) fs.unlinkSync(tgt)
                 break;
             case 'R':
@@ -103,8 +137,19 @@ exports.run=function(fom,env){
                 if(!src) throw new Error("fom: when copy src is not nullable ")
                 if(!tgt) throw new Error("fom: when copy tgt is not nullable ")
                 src = path.join(env.workspace,src)
-                tgt = path.join(env.workspace,tgt)
-                fs.rename(src,tgt)
+                tgt = getRigthTgt(env.workspace,tgt) //path.join(env.workspace,tgt)
+                 //DATA 情况
+                var data = node["DATA"]
+                if(data)
+                {   
+                    var newJson =eval("renderJson." + data);
+                    templateEngine.renderFile(src,tgt,newJson)
+                    fs.unlink(src)
+                }
+                else
+                {
+                    fs.rename(src,tgt)
+                }
                 break;
             default:
                 throw new Error("fom:unknow operate: " + op)
@@ -114,3 +159,7 @@ exports.run=function(fom,env){
 
     }
 }
+
+
+
+exports.run = exe

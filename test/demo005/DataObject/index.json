@@ -1,0 +1,34 @@
+{
+    "name" : "apporoad",
+    "team" : "ace lonely",
+    "no": 1202,
+    "hobbies":[
+        {
+            "name" : "football",
+            "weight":12
+        },
+        {
+            "name":"compute game",
+            "weight":13
+        }
+    ],
+    "gf":[
+        {
+            "name" : "shiva",
+            "hp":2000,
+            "mp":500
+        },
+        {
+            "name" : "Cerberus",
+            "hp":2500,
+            "mp":300
+        },
+        {
+            "name":"ifrit",
+            "hp":3000,
+            "mp":600
+        }
+    ],
+    "isShowGf": true,
+    "isShowHobbies" : false
+}
