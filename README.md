@@ -13,8 +13,8 @@
 * node test.js -t fom
 
 ## how to use 
-cd [workspace]
-node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt --debug false
+* cd [workspace]
+* node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt --debug false
 
 ## ide
 * vs code or vi 
