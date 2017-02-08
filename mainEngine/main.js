@@ -101,25 +101,42 @@ var execFomRecurring = function(env,templateEngine,renderJson){
  */
 var execRenderRecurring = function(workspace,tgt,templateEngine,renderJson){
     //asyn to accelerate
-    fs.exists(workspace,function (exists) {
-        if(!fs.existsSync(tgt)){ fs.mkdirSync(tgt)}
-        if(exists)
-        {
-            var files = fs.readdirSync(workspace)
-            files.forEach(function(file,index){
-                if(fs.statSync(workspace +'/' + file).isDirectory())
-                {
-                    //recurse
-                    execRenderRecurring(workspace +'/' + file,tgt + '/' + file,templateEngine,renderJson)
-                }
-                else
-                {
-                    templateEngine.renderFile(workspace +'/' + file,tgt + '/' + file,renderJson)
-                }
-            })
+    // fs.exists(workspace,function (exists) {
+    //     if(!fs.existsSync(tgt)){ fs.mkdirSync(tgt)}
+    //     if(exists)
+    //     {
+    //         var files = fs.readdirSync(workspace)
+    //         files.forEach(function(file,index){
+    //             if(fs.statSync(workspace +'/' + file).isDirectory())
+    //             {
+    //                 //recurse
+    //                 execRenderRecurring(workspace +'/' + file,tgt + '/' + file,templateEngine,renderJson)
+    //             }
+    //             else
+    //             {
+    //                 templateEngine.renderFile(workspace +'/' + file,tgt + '/' + file,renderJson)
+    //             }
+    //         })
 
-        }
-    })
+    //     }
+    // })
+
+    if(fs.existsSync(workspace))
+    {
+        if(!fs.existsSync(tgt)){ fs.mkdirSync(tgt)}
+        var files = fs.readdirSync(workspace)
+        files.forEach(function(file,index){
+            if(fs.statSync(workspace +'/' + file).isDirectory())
+            {
+                //recurse
+                execRenderRecurring(workspace +'/' + file,tgt + '/' + file,templateEngine,renderJson)
+            }
+            else
+            {
+                templateEngine.renderFile(workspace +'/' + file,tgt + '/' + file,renderJson)
+            }
+        })
+    }
 }
 
 
@@ -185,7 +202,7 @@ exports.run =function (params,callback) {
         //在非调试情况下，会删除中间记录
         if(!isDebug)
         {
-            
+            gu.delDir(nwp)
         }
     })
     
