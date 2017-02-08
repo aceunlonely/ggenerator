@@ -151,6 +151,7 @@ exports.run =function (params,callback) {
     {
         dDataSrcPath = 'test/demo005/dData.zip'
         tpName = 'test'
+        tgtPath = null
         isDebug =true
     }
 
