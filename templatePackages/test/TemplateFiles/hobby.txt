@@ -1,6 +1,6 @@
 ==========================================
-my hobby is ${name}
+my hobby is ${data.name}
 
-weight: ${weight}
+weight: ${data.weight}
 
 ===========================================
