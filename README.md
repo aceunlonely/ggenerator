@@ -18,3 +18,7 @@
 
 ## ide
 * vs code or vi 
+
+
+## node env 
+* v6.2.2

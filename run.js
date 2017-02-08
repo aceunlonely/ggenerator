@@ -31,5 +31,12 @@ try
 }
 catch(e)
 {
-    console.log(e.message)
+    if(program.debug== 'true')
+    {   
+        console.log(e)
+    }
+    else
+    {
+        console.log(e.message)
+    }
 }
