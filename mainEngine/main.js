@@ -124,14 +124,21 @@ var execRenderRecurring = function(workspace,tgt,templateEngine,renderJson){
 
 
 
-exports.run =function (params) {
+exports.run =function (params,callback) {
     var dDataSrcPath = params.dDataPath
     var tpName = params.templatePackage
+    var tgtPath = params.targetPath
+    var isDebug = params.debug || false
+
     if(config.isTest)
     {
         dDataSrcPath = 'test/demo005/dData.zip'
         tpName = 'test'
+        isDebug =true
     }
+
+    //-1. check params
+    if(!fs.existsSync(path.join('templatePackages',tpName))){ throw new Error("gg does not have the templatePackage : " + tpName)}
 
     //0. create folder of workplace
     var wp = config.workplace
@@ -144,8 +151,8 @@ exports.run =function (params) {
     var tempPath = path.join(nwp,'temp')
     fs.mkdirSync(tempPath)
     //tgt
-    var tgtPath=path.join(nwp,'tgt')
-    fs.mkdirSync(tgtPath)
+    if(!tgtPath || tgtPath=='') tgtPath=path.join(nwp,'tgt')
+    if(!fs.existsSync(tgtPath)) fs.mkdirSync(tgtPath)
 
     //combine env
     var env= {
@@ -169,6 +176,17 @@ exports.run =function (params) {
         execFomRecurring(env,tempEngine,dDataJson)
         //7. recurring render all files to tgt
         execRenderRecurring(env.workspace,env.targetPath,tempEngine,dDataJson)
+
+        if(callback)
+        {
+            callback()
+        }
+
+        //在非调试情况下，会删除中间记录
+        if(!isDebug)
+        {
+            
+        }
     })
     
 }

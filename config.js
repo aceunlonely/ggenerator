@@ -1,6 +1,6 @@
 var config={
     workplace : "workplace",
-    isTest : true
+    isTest : false
 }
 
 //console.log('config')
