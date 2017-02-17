@@ -15,9 +15,9 @@ var parser =  new xml2js.Parser({explicitArray : false, ignoreAttrs : true , asy
 
 //get template object
 var getTd=function(env){
-    var tempTConfig = require("../"+env.templatePackageRootPath +'/Config')
-    var tempDConfig = require("../"+env.dynamicRootPath + '/Config')
-    var tempDData = require("../"+env.dynamicRootPath + '/DataObject')
+    var tempTConfig = require( path.join( env.templatePackageRootPath ,'Config'))
+    var tempDConfig = require(env.dynamicRootPath + '/Config')
+    var tempDData = require(env.dynamicRootPath + '/DataObject')
     return {
         data : null,
         tConfig :tempTConfig,
@@ -154,12 +154,11 @@ exports.run =function (params,callback) {
         tgtPath = null
         isDebug =true
     }
-
     //-1. check params
-    if(!fs.existsSync(path.join('templatePackages',tpName))){ throw new Error("gg does not have the templatePackage : " + tpName)}
+    if(!fs.existsSync(path.join(path.dirname(__dirname),'templatePackages',tpName))){ throw new Error("gg does not have the templatePackage : " + tpName)}
 
     //0. create folder of workplace
-    var wp = config.workplace
+    var wp = path.join(path.dirname(__dirname),config.workplace)
     var nwp= path.join(wp,Date.now().toString())
     fs.mkdirSync(nwp)
     //dData
@@ -175,10 +174,10 @@ exports.run =function (params,callback) {
     //combine env
     var env= {
             targetPath : tgtPath,   // 目标路径
-            templatePackageRootPath : path.join('templatePackages',tpName),
+            templatePackageRootPath : path.join(path.dirname(__dirname),'templatePackages',tpName),
             dynamicRootPath : dDataPath,     //动态包解压位置
 
-             refPath: path.join('templatePackages',tpName,'TemplateFiles'),    //引用路径
+             refPath: path.join(path.dirname(__dirname),'templatePackages',tpName,'TemplateFiles'),    //引用路径
              dynamicPath: path.join(dDataPath,'FileCollection'),                       //动态引用路径
              workspace: tempPath                                               //工作路径
 
@@ -186,6 +185,7 @@ exports.run =function (params,callback) {
 
     //1. unpack dData package
     compress.unzip(dDataSrcPath,env.dynamicRootPath,function() {
+        debugger;
         //2. read dData json
         var dDataJson = getTd(env)
         //3. create real workspace
