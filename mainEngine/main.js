@@ -210,7 +210,7 @@ exports.run =function (params,callback) {
 }
 
 
-exports.test=function (params) {
+exports.test = function (params) {
     console.log('test running..')
     var jsonData ={
         name : 'xyliu',
@@ -306,4 +306,15 @@ exports.test=function (params) {
 
     }
     console.log('test terminated')
+}
+
+exports.addTemplate= function(ti){
+
+        ti.templatePackageName
+        ti.tempalatePath
+        //删除原模板
+        var tgtPath = path.join(path.dirname(__dirname),'templatePackages',ti.templatePackageName)
+        gu.delDir(tgtPath)
+        //unzip
+        compress.unzip(ti.tempalatePath,tgtPath,function() {})
 }
