@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FOM>
+    <NODE>
+        <SOURCE>XXXEntity.cs</SOURCE>
+        <TARGET>${ddata.solution.namespace}.Entity/${ddata.Head.Name}Entity</TARGET>
+        <DATA>ddata.Head</DATA>
+    </NODE>
+    <NODE>
+        <SOURCE>XXXEntity.cs</SOURCE>
+        <TARGET>${ddata.solution.namespace}.Entity/${ddata.Body.Name}Entity</TARGET>
+        <DATA>ddata.Body</DATA>
+    </NODE>
+</FOM>

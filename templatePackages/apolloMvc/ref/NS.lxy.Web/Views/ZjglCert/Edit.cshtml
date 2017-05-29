@@ -1,0 +1,34 @@
+@model NS.lxy.Web.Areas.M.Models.ZjglCertEditModel
+@{
+    Layout = "~/Views/Shared/_LayoutDialog.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="div-tabs">
+        <div class="modal-body">
+            <section class="panel">
+                <header class="panel-heading custom-tab blue-tab">
+                    <ul style="padding: 0; margin: 0;">
+                        <li><a href="#iframe-head">转出备案表头</a></li>
+                        @{
+                            if (!string.IsNullOrEmpty(Model.ID))
+                            {
+                                <li><a href="#iframe-body">转出备案表体</a></li>
+                            }
+                        }
+                    </ul>
+                </header>
+                <div class="panel-body tab-body">
+                    <iframe id="iframe-head" src="@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/M/ZjglCert/OutHead?Id=" + @Model.ID)" frameborder="0" style="width: 100%;" scrolling='no' data-load="true"></iframe>
+                    @{
+    if (!string.IsNullOrEmpty(Model.ID))
+    {
+        <iframe id="iframe-body" data-src="@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/M/ZjglCertBody/OutBody?HeadOid=" + @Model.ID)" frameborder="0" style="width: 100%;" scrolling='no' data-load="false"></iframe>
+    }
+                    }
+                </div>
+            </section>
+        </div>
+    </div>
+}
