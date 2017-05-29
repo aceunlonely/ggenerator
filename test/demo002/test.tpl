@@ -21,3 +21,13 @@ my age is ${age}
     ${i};
 {@/each}
 {# 嵌套 include， 略}
+
+{# 自定义函数}
+{@helper numberPlus}
+    function(number) {
+        return number + 1;
+    }
+{@/helper}
+
+
+Number: ${1|numberPlus}

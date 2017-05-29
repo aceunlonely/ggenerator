@@ -40,7 +40,8 @@ var endWith=function(str,s){
     }
     if(!fs.existsSync(path.dirname(tgt)))
     {
-        fs.mkdirSync(path.dirname(tgt));
+        gu.mkdirSync(path.dirname(tgt));
+        //fs.mkdirSync(path.dirname(tgt));
     }
     return tgt
  }
@@ -106,7 +107,8 @@ var exe =function(fom,env,templateEngine,renderJson){
                 tgt =  getRigthTgt(env.workspace,tgt)
                 if(!fs.existsSync(path.dirname(tgt)))
                 {
-                    fs.mkdirSync(path.dirname(tgt));
+                    gu.mkdirSync(path.dirname(tgt));
+                    //fs.mkdirSync(path.dirname(tgt));
                 }
 
                 //DATA 情况

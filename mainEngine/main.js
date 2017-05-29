@@ -181,31 +181,41 @@ exports.run =function (params,callback) {
              dynamicPath: path.join(dDataPath,'FileCollection'),                       //动态引用路径
              workspace: tempPath                                               //工作路径
 
-             }
+            }
+            
+    //main logic
+    var mainExcutor=function() {
+            //debugger;
+            //2. read dData json
+            var dDataJson = getTd(env)
+            //3. create real workspace
+            gu.copyDir(path.join(env.templatePackageRootPath,'Workspace'),env.workspace)
+            //4. foreach find fom
+            execFomRecurring(env,tempEngine,dDataJson)
+            //7. recurring render all files to tgt
+            execRenderRecurring(env.workspace,env.targetPath,tempEngine,dDataJson)
 
-    //1. unpack dData package
-    compress.unzip(dDataSrcPath,env.dynamicRootPath,function() {
-        debugger;
-        //2. read dData json
-        var dDataJson = getTd(env)
-        //3. create real workspace
-        gu.copyDir(path.join(env.templatePackageRootPath,'Workspace'),env.workspace)
-        //4. foreach find fom
-        execFomRecurring(env,tempEngine,dDataJson)
-        //7. recurring render all files to tgt
-        execRenderRecurring(env.workspace,env.targetPath,tempEngine,dDataJson)
+            if(callback)
+            {
+                callback()
+            }
 
-        if(callback)
-        {
-            callback()
-        }
+            //在非调试情况下，会删除中间记录
+            if(!isDebug)
+            {
+                gu.delDir(nwp)
+            }
+        };
 
-        //在非调试情况下，会删除中间记录
-        if(!isDebug)
-        {
-            gu.delDir(nwp)
-        }
-    })
+    if(gu.isDirectory(dDataSrcPath))
+    {
+        gu.copyDir(dDataSrcPath,env.dynamicRootPath,mainExcutor)
+    }
+    else
+    {
+        //1. unpack dData package
+        compress.unzip(dDataSrcPath,env.dynamicRootPath,mainExcutor)
+    }
     
 }
 
