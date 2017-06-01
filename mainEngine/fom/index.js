@@ -117,6 +117,9 @@ var exe =function(fom,env,templateEngine,renderJson){
                 {   
                     var newRenderJson = JSON.parse(JSON.stringify(renderJson));
                     newRenderJson.data = eval("renderJson." + data);
+                    //record data's dataString
+                    if(newRenderJson.data)
+                        newRenderJson.data.orignString = data
                     templateEngine.renderFile(src,tgt,newRenderJson)
                 }
                 else
@@ -144,8 +147,14 @@ var exe =function(fom,env,templateEngine,renderJson){
                 var data = node["DATA"]
                 if(data)
                 {   
-                    var newJson =eval("renderJson." + data);
-                    templateEngine.renderFile(src,tgt,newJson)
+                    var newRenderJson = JSON.parse(JSON.stringify(renderJson));
+                    newRenderJson.data = eval("renderJson." + data);
+                    //record data's dataString
+                    if(newRenderJson.data)
+                        newRenderJson.data.orignString = data
+                    templateEngine.renderFile(src,tgt,newRenderJson)
+                    // var newJson =eval("renderJson." + data);
+                    // templateEngine.renderFile(src,tgt,newJson)
                     fs.unlink(src)
                 }
                 else

@@ -100,3 +100,5 @@ PS: template engine object has these objects (use like :${ddata.name} )
         dc : dc is short for dConfig
         ddata: dConfig is an object from dynamic's Config dir, we load it via require('DDataPath/DataObject')
         d : d is short for ddate
+
+        data.orignString : data.orignString is the string value from <DATA>
