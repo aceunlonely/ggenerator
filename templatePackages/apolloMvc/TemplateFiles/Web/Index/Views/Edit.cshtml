@@ -1,4 +1,4 @@
-﻿@model NS.lxy.Web.Areas.M.Models.ZjglCertEditModel
+﻿@model %NameSpace%Web.Areas.%MVC-MODULE%.Models.%ClassName%EditModel
 @{
     Layout = "~/Views/Shared/_LayoutDialog.cshtml";
 }
@@ -20,11 +20,11 @@
                     </ul>
                 </header>
                 <div class="panel-body tab-body">
-                    <iframe id="iframe-head" src="@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/M/ZjglCert/OutHead?Id=" + @Model.ID)" frameborder="0" style="width: 100%;" scrolling='no' data-load="true"></iframe>
+                    <iframe id="iframe-head" src="@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%/OutHead?Id=" + @Model.ID)" frameborder="0" style="width: 100%;" scrolling='no' data-load="true"></iframe>
                     @{
     if (!string.IsNullOrEmpty(Model.ID))
     {
-        <iframe id="iframe-body" data-src="@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/M/ZjglCertBody/OutBody?HeadOid=" + @Model.ID)" frameborder="0" style="width: 100%;" scrolling='no' data-load="false"></iframe>
+        <iframe id="iframe-body" data-src="@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%Body/OutBody?HeadOid=" + @Model.ID)" frameborder="0" style="width: 100%;" scrolling='no' data-load="false"></iframe>
     }
                     }
                 </div>

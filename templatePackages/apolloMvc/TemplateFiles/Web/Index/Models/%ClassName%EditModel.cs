@@ -7,23 +7,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Dcjet.Apollo.MvcBase;
-using NS.lxy.Entity;
-using NS.lxy.Web.Common;
+using %NameSpace%Entity;
+using %NameSpace%Web.Common;
 
-namespace NS.lxy.Web.Areas.M.Models
+namespace %NameSpace%Web.Areas.%MVC-MODULE%.Models
 {
     /// <summary>
-    /// 证件表视图模型
+    /// %TableDesc%视图模型
     /// </summary>
-    public class ZjglCertEditModel : NS.lxyBaseModel
+    public class %ClassName%EditModel : %NameSpaceOnly%BaseModel
     {
 
         public string ID { get; set; }
        
-        public ZjglCertEntity zjglCert { get; set; }
+        public %ClassName%Entity %ClassNameObj% { get; set; }
 		
 		//数据绑定数据源
-		
+		%MVC_MODELCTRLLISTEDIT%
 
     }
 }

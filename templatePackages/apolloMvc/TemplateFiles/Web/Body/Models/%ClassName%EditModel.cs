@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using NS.lxy.Web.Areas.M.Search;
-using NS.lxy.Web.Common;
-using NS.lxy.Entity;
+using %NameSpace%Web.Areas.%MVC-MODULE%.Search;
+using %NameSpace%Web.Common;
+using %NameSpace%Entity;
 
-namespace NS.lxy.Web.Areas.M.Models
+namespace %NameSpace%Web.Areas.%MVC-MODULE%.Models
 {
-    public class ZjglCertListImgEditModel : NS.lxyBaseModel
+    public class %ClassName%EditModel : %NameSpaceOnly%BaseModel
     {
-        private ZjglCertListImgSearch _searchEntity = null;
-        public ZjglCertListImgSearch SearchEntity
+        private %ClassName%Search _searchEntity = null;
+        public %ClassName%Search SearchEntity
         {
             get
             {
                 if (_searchEntity == null)
                 {
-                    _searchEntity = new ZjglCertListImgSearch();
+                    _searchEntity = new %ClassName%Search();
                 }
                 return _searchEntity;
 
@@ -32,9 +32,9 @@ namespace NS.lxy.Web.Areas.M.Models
 
         public string ID { get; set; }
 
-        public ZjglCertListImgEntity zjglCertListImg { get; set; }
+        public %ClassName%Entity %ClassNameObj% { get; set; }
 		
 		//数据绑定数据源
-		
+		%MVC_MODELCTRLLISTEDIT%
     }
 }

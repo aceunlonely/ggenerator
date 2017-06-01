@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using NS.lxy.Web.Areas.M.Search;
-using NS.lxy.Web.Common;
+using %NameSpace%Web.Areas.%MVC-MODULE%.Search;
+using %NameSpace%Web.Common;
 using System.Web.Mvc;
 
 
-namespace NS.lxy.Web.Areas.M.Models
+namespace %NameSpace%Web.Areas.%MVC-MODULE%.Models
 {
-    public class ZjglCertIndexModel : NS.lxyBaseModel
+    public class %ClassName%IndexModel : %NameSpaceOnly%BaseModel
     {
-        private ZjglCertSearch searchEntity = null;
-        public ZjglCertSearch SearchEntity
+        private %ClassName%Search searchEntity = null;
+        public %ClassName%Search SearchEntity
         {
             get
             {
                 if (searchEntity == null)
                 {
-                    searchEntity = new ZjglCertSearch();
+                    searchEntity = new %ClassName%Search();
                 }
                 return searchEntity;
 
@@ -30,6 +30,6 @@ namespace NS.lxy.Web.Areas.M.Models
         }
 		
 		//数据绑定数据源
-	    
+	    %MVC_MODELCTRLLISTINDEX%
     }
 }

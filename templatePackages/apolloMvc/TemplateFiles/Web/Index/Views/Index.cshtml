@@ -1,4 +1,4 @@
-﻿@model NS.lxy.Web.Areas.M.Models.ZjglCertIndexModel
+﻿@model %NameSpace%Web.Areas.%MVC-MODULE%.Models.%ClassName%IndexModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -18,70 +18,7 @@
                 <div class="panel-body">
                     <!-- 查询条件 -->
                     <table class="searchTable">
-                       
-    <tr>
-
-    <th>证件类型</th>
-    <td>@Html.DcjetTextBoxFor(x => x.SearchEntity.CertType)</td>
-
-    </tr>
-
-    <tr>
-
-    <th>证件编号</th>
-    <td>@Html.DcjetTextBoxFor(x => x.SearchEntity.Code)</td>
-
-    </tr>
-
-    <tr>
-
-    <th>发证日期</th>
-    <td>@Html.DcjetDatePickerFor(x => x.SearchEntity.LicenceDateBegin)<span>~</span>@Html.DcjetDatePickerFor(x => x.SearchEntity.LicenceDateEnd)</td>
-
-    </tr>
-
-    <tr>
-
-    <th>生效日期</th>
-    <td>@Html.DcjetDatePickerFor(x => x.SearchEntity.EffectiveDateBegin)<span>~</span>@Html.DcjetDatePickerFor(x => x.SearchEntity.EffectiveDateEnd)</td>
-
-    </tr>
-
-    <tr>
-
-    <th>过期日期</th>
-    <td>@Html.DcjetDatePickerFor(x => x.SearchEntity.ExpiryDateBegin)<span>~</span>@Html.DcjetDatePickerFor(x => x.SearchEntity.ExpiryDateEnd)</td>
-
-    </tr>
-
-    <tr>
-
-    <th>最大使用次数</th>
-    <td> @Html.DcjetNumberFor(x => x.SearchEntity.MaxUseCount)</td>
-
-    </tr>
-
-    <tr>
-
-    <th>剩余使用次数</th>
-    <td> @Html.DcjetNumberFor(x => x.SearchEntity.LeftUseCount)</td>
-
-    </tr>
-
-    <tr>
-
-    <th>公司别编码</th>
-    <td>@Html.DcjetTextBoxFor(x => x.SearchEntity.CorpCode)</td>
-
-    </tr>
-
-    <tr>
-
-    <th>状态</th>
-    <td> @Html.DcjetNumberFor(x => x.SearchEntity.Status)</td>
-
-    </tr>
-
+                       %MVC-HTML-Condition%
                     </table>
                 </div>
             </section>
@@ -94,10 +31,10 @@
                     <div class="eait-area">
                         <button type="button" id="btnAdd" class="btn btn02 color01" title="新增"><span class="fa fa-plus"></span><b class="icon-txt">新增</b></button>
                         <button type="button" id="btnDeleteAll" class="btn btn02 color07" title="批量删除"><span class="fa fa-trash-o"></span><b class="icon-txt">批量删除</b></button>
-						 
-						 
-						 
-						 
+						 %MVC_HTMLIMPORTLABEL%
+						 %MVC_HTMLEXPORTLABEL%
+						 %MVC_HTMLSYNCIMPORTLABEL%
+						 %MVC_HTMLSYNCEXPORTLABEL%
                     </div>
                 </header>
             </section>
@@ -108,21 +45,12 @@
             <section class="panel">
                 <div class="panel-body">
                     <div id="gridContainer">
-                        <table id="gridTable" data-toggle="table" data-escape="true" class="table table-striped table-hover" data-id-field="Oid" get-data="@Url.Content("~/" + SystemConfig.SystemAreaKey + "/M/ZjglCert/LoadIndexData")">
+                        <table id="gridTable" data-toggle="table" data-escape="true" class="table table-striped table-hover" data-id-field="Oid" get-data="@Url.Content("~/" + SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%/LoadIndexData")">
                             <thead>
                                 <tr>
                                     <th data-checkbox="true"></th>
                                     <th data-formatter="operatorFormatter" data-width="90px"></th>
-                                    
-<th data-field="CertType" >证件类型</th>
-<th data-field="Code" >证件编号</th>
-<th data-field="LicenceDate" data-formatter="apolloPage.framework.base.util.formatBpDate">发证日期</th>
-<th data-field="EffectiveDate" data-formatter="apolloPage.framework.base.util.formatBpDate">生效日期</th>
-<th data-field="ExpiryDate" data-formatter="apolloPage.framework.base.util.formatBpDate">过期日期</th>
-<th data-field="MaxUseCount" >最大使用次数</th>
-<th data-field="LeftUseCount" >剩余使用次数</th>
-<th data-field="CorpCode" >公司别编码</th>
-<th data-field="Status" >状态</th>
+                                    %MVC-HTML-Show%
 
                                 </tr>
                             </thead>
@@ -144,7 +72,7 @@
             $("#btnAdd").click(function() {
                 var id = 10;
                 var options = {
-                    url: '@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/M/ZjglCert/OutHead")',
+                    url: '@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%/%MVC-EDIT%")',
                     title: "新增",
                     width: 800,
                     height: 500
@@ -158,7 +86,7 @@
                     apolloPage.framework.base.systemConfirm("确定要删除勾选的这几条数据？", function () {
                         var oids = apolloPage.listSelectedValues();
                         $.ajax({
-                            url: "@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/M/ZjglCert/DeleteAll")",
+                            url: "@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%/DeleteAll")",
                         type: "post",
                         data: { oids: oids.join(',') },
                         dataType: "json",
@@ -175,18 +103,18 @@
             }
             });
 			
-			
+			%MVC_HTMLIMPORTJS%
 		
+			%MVC_HTMLEXPORTJS%
 			
-			
-			
+			%MVC_HTMLSYNCIMPORTJS%
         });
 		
 		
 		 //修改
     function btnUpdate_click(oid) {
         var options = {
-            url: '@Url.Content("~/" + SystemConfig.SystemAreaKey + "/M/ZjglCert/OutHead?ID=")' + oid,
+            url: '@Url.Content("~/" + SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%/%MVC-EDIT%?ID=")' + oid,
             title: "维护",
             width: 800
         };
@@ -196,7 +124,7 @@
     function btnDelete_click(oid) {
         apolloPage.framework.base.systemConfirm("确认要删除该条记录吗？", function () {
             $.ajax({
-                url: "@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/M/ZjglCert/Delete")",
+                url: "@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%/Delete")",
                 type: "post",
                 data: { oid: oid },
                 dataType: "json",

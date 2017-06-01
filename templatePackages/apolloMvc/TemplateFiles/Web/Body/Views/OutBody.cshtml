@@ -1,0 +1,158 @@
+﻿@model %NameSpace%Web.Areas.%MVC-MODULE%.Models.%ClassName%EditModel
+@{
+    Layout = "~/Views/Shared/_LayoutDialog.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.ID)
+    @Html.HiddenFor(x => x.HeadOid)
+    <div class="dy-container">
+        <div class="row" id="search-wrapper">
+            <div class="col-sm-12">
+                <div class="form-block">
+                    <table class="searchTable">
+                       %MVC-HTML-BODY%
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="toolbar-wrapper">
+            <div class="col-sm-12">
+                <div class="eait-area edit-modal">
+                    <button id="btnAdd" type="button" class="btn btn02 color01" title="新增"><span class="fa fa-plus"></span> </button>
+                    <button id="btnDeleteAll" type="button" class="btn btn02 color07"><span class="fa fa-trash-o" title="批量删除"></span></button>
+                    <button id="btnSave" type="button" class="btn btn02 color02"><span class="fa fa-clipboard" title="保存"></span> </button>
+                </div>
+            </div>
+        </div>
+        <div id="grid-wrapper" class="row">
+            <div class="col-sm-12">
+                <div id="gridContainer">
+                    <table id="gridTable" data-escape="true"  class="table table-striped table-hover" data-id-field="Oid" get-data="@Url.Content("~/" + SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%Body/LoadIndexData")">
+                        <thead>
+                            <tr>
+                                <th data-checkbox="true" data-width="45px"></th>
+                                <th data-formatter="operatorFormatter" data-width="90px"></th>
+                             %MVC-HTML-Show%
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                @{
+    Html.RenderPartial("~/Views/Common/Paginate.cshtml", Model.SearchEntity);
+                }
+            </div>
+        </div>
+    </div>
+}
+@section head{
+    <script type="text/javascript">
+
+    $(function () {
+        $("#btnAdd").click(function () {
+            //新增
+            apolloPage.emptyFormData();
+        });
+
+        //删除
+        $("#btnDeleteAll").click(function () {
+            if (apolloPage.isSelect()) {
+                apolloPage.framework.base.systemConfirm("确定要删除勾选的这几条数据？", function () {
+                    var oids = apolloPage.listSelectedValues();
+                    $.ajax({
+                        url: "@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%Body/DeleteAll")")",
+                        type: "post",
+                        data: { oids: oids.join(',') },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.Success) {
+                                apolloPage.framework.base.systemAlert("删除成功");
+                            } else {
+                                apolloPage.framework.base.systemAlert("删除失败");
+                            }
+                            /// 2016-12-07
+                            apolloPage.refreshTable();
+                        }
+                    });
+                });
+            }
+        });
+
+
+        //保存数据
+        $("#btnSave").click(function () {
+            var from = $("form");
+            if (from.valid()) {
+                var id = $("#ID").val();
+                $.ajax({
+                    url: "@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%Body/Edit")",
+                    data: $("form").serialize(),
+                    dataType: "json",
+                    type: "post",
+                    success: function (result) {
+                        if (!result.Success) {
+                            apolloPage.framework.base.systemAlert(result.Message);
+                        } else {
+                            apolloPage.framework.base.systemAlert(id == "" || id == undefined ? "添加成功" : "更新成功");
+                            /// 2016-12-07
+                            apolloPage.refreshTable();
+                        }
+                    }
+                });
+            }
+
+        });
+    });
+
+
+   
+		//修改
+        function btnUpdate_click(oid) {
+        /// 2016-12-07
+        $.ajax({
+            url: "@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%Body/GetEditData")",
+            data: { oid: oid },
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                $("#ID").val(data.Oid);
+                $("#sjgRecordlistOutPreEntity_GName").val(data.sjgRecordlistOutPreEntity.GName);
+                $("#sjgRecordlistOutPreEntity_TradeCode").val(data.sjgRecordlistOutPreEntity.TradeCode);
+                $("#sjgRecordlistOutPreEntity_CodeTS").val(data.sjgRecordlistOutPreEntity.CodeTS);
+            }
+        });
+    }
+
+    //单笔删除
+        function btnDelete_click(oid) {
+        apolloPage.framework.base.systemConfirm("确认要删除该条记录吗？", function () {
+            $.ajax({
+                url: "@Url.Content("~/" + @SystemConfig.SystemAreaKey + "/%MVC-MODULE%/%ClassName%Body/Delete")",
+                type: "post",
+                data: { oid: oid },
+                dataType: "json",
+                success: function (result) {
+                    if (result.Success) {
+                        apolloPage.framework.base.systemAlert("删除成功");
+                    } else {
+                        apolloPage.framework.base.systemAlert("删除失败");
+                    }
+                    /// 2016-12-07
+                    apolloPage.refreshTable();
+                }
+            });
+        });
+    }
+
+    function operatorFormatter(value, row, index) {
+        return '<button type="button" class="btn btn02 color03" onclick="btnUpdate_click(\'' + row.Oid + '\')" title="修改" id="btnUpdate"><span class="fa fa-pencil-square-o"></span></button>' +
+            '<button type="button" class="btn btn02 color07" onclick="btnDelete_click(\'' + row.Oid + '\')" title="删除" id="btnDelete"><span class="fa fa-trash-o"></span></button>';
+    }
+    </script>
+}
+
+
+
+
+

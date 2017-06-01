@@ -8,19 +8,19 @@ using Dcjet.Apollo.MvcCommon;
 using Dcjet.Framework.DataProvider;
 using Dcjet.Framework.Entity;
 using Dcjet.Framework.Helpers;
-using NS.lxy.Web.Areas.M.Models;
-using NS.lxy.Web.Common;
-using NS.lxy.Core.Bll;
-using NS.lxy.Entity;
+using %NameSpace%Web.Areas.%MVC-MODULE%.Models;
+using %NameSpace%Web.Common;
+using %NameSpace%Core.Bll;
+using %NameSpace%Entity;
 
 
-namespace NS.lxy.Web.Areas.M.Controllers
+namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
 {
-    public class ZjglCertListImgBodyController : NS.lxyBaseController
+    public class %ClassName%BodyController : %NameSpaceOnly%BaseController
     {
-        private readonly ZjglCertListImgBlo _zjglCertListImgBlo = new ZjglCertListImgBlo();
+        private readonly %ClassName%Blo _%ClassNameObj%Blo = new %ClassName%Blo();
 
-        public ActionResult OutBody(ZjglCertListImgEditModel model)
+        public ActionResult OutBody(%ClassName%EditModel model)
         {
             #region 业务代码,加载model数据源
             #endregion
@@ -28,10 +28,10 @@ namespace NS.lxy.Web.Areas.M.Controllers
         }     
 
         [HttpPost]
-        public JsonResult LoadIndexData(ZjglCertListImgEditModel model)
+        public JsonResult LoadIndexData(%ClassName%EditModel model)
         {
             var pagedParames = GetParedPagedParameters(model);
-            var result = _zjglCertListImgBlo.Select(pagedParames);
+            var result = _%ClassNameObj%Blo.Select(pagedParames);
             return Json(result);
         }
 
@@ -40,7 +40,7 @@ namespace NS.lxy.Web.Areas.M.Controllers
         /// </summary>
         /// <param name="model">model</param>
         /// <returns>查询条件</returns>
-        public PagedParameters GetParedPagedParameters(ZjglCertListImgEditModel model)
+        public PagedParameters GetParedPagedParameters(%ClassName%EditModel model)
         {
             var pagedParames = new PagedParameters();
             var listWhere = new List<WhereParams>();
@@ -50,7 +50,7 @@ namespace NS.lxy.Web.Areas.M.Controllers
             #endregion
 
             pagedParames.WhereParamsList = listWhere;
-            pagedParames.TableName = "T_ZJGL_CERT_LIST_IMG";
+            pagedParames.TableName = "%TableName%";
             pagedParames.PageIndex = model.SearchEntity._PageIndex.Value;
             pagedParames.PageSize = model.SearchEntity._PageSize.Value;
 			#region 业务代码,如果页面上有code,则进行code转换
@@ -68,13 +68,13 @@ namespace NS.lxy.Web.Areas.M.Controllers
         [HttpPost]  
         public ActionResult GetEditData(string oid)
         {
-            var entity = _zjglCertListImgBlo.Select(oid);
+            var entity = _%ClassNameObj%Blo.Select(oid);
             return Json(entity);
         }
 
 
         [HttpPost]
-        public ActionResult Edit(ZjglCertListImgEditModel model, FormCollection formCollection)
+        public ActionResult Edit(%ClassName%EditModel model, FormCollection formCollection)
         {
             var result = EditDetail(model);
             return Json(result);
@@ -85,7 +85,7 @@ namespace NS.lxy.Web.Areas.M.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public Result EditDetail(ZjglCertListImgEditModel model)
+        public Result EditDetail(%ClassName%EditModel model)
         {
             if (string.IsNullOrEmpty(model.ID))
             {
@@ -93,17 +93,17 @@ namespace NS.lxy.Web.Areas.M.Controllers
 
                 #endregion
 
-                return _zjglCertListImgBlo.Insert(model.zjglCertListImg);
+                return _%ClassNameObj%Blo.Insert(model.%ClassNameObj%);
             }
             else
             {
-                var updateEntity = _zjglCertListImgBlo.Select(model.ID);
+                var updateEntity = _%ClassNameObj%Blo.Select(model.ID);
 
                 #region 业务代码，将Model中的实体属性赋值到更新实体上
 				%MVC-CONTROLLEREDITPROPERTY%
                 #endregion
 
-                return _zjglCertListImgBlo.Update(updateEntity);
+                return _%ClassNameObj%Blo.Update(updateEntity);
             }
 
 
@@ -119,7 +119,7 @@ namespace NS.lxy.Web.Areas.M.Controllers
         public ActionResult Delete(string oid)
         {
             //这里写删除业务
-            var result = _zjglCertListImgBlo.Delete(oid);
+            var result = _%ClassNameObj%Blo.Delete(oid);
             return Json(result);
         }
 
@@ -134,7 +134,7 @@ namespace NS.lxy.Web.Areas.M.Controllers
         {
             //这里写删除业务
             var arrayOids = oids.Split(',').ToList();
-            var res = _zjglCertListImgBlo.Delete(arrayOids);
+            var res = _%ClassNameObj%Blo.Delete(arrayOids);
             return Json(res);
         }
     }
