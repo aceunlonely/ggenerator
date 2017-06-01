@@ -9,8 +9,5 @@ _templateEngineExt.firstLowerCase = function(A){
 
 
 
-
-
-
 // this is for templateEngine Ext to register
 exports.templateEngineExt = _templateEngineExt;
