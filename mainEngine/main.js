@@ -29,6 +29,26 @@ var getTd=function(env){
     }
 }
 
+//注册模板引擎 模板的扩展方法
+var _registerTemplateExt=function(extPath,templateEngine){
+
+    //只有当存在注册方法时才注册
+    if(tempEngine.register)
+    {
+        var ext = require(extPath)
+        //只有存在 templateEngineExt节点时，进行注册
+        if(ext && ext.templateEngineExt){
+            for(var key in ext.templateEngineExt){
+                var fn = ext.templateEngineExt[key]
+                if(typeof fn == 'function')
+                {
+                    tempEngine.register(key,fn);
+                }
+            }
+        }
+    }
+}
+
 var endWith=function(str,s){
   if(s==null||s==""||str.length==0||s.length>str.length)
      return false;
@@ -178,6 +198,7 @@ exports.run =function (params,callback) {
             dynamicRootPath : dDataPath,     //动态包解压位置
 
              refPath: path.join(path.dirname(__dirname),'templatePackages',tpName,'TemplateFiles'),    //引用路径
+             extPath: path.join(path.dirname(__dirname),'templatePackages',tpName,'Ext'),    //扩展包位置
              dynamicPath: path.join(dDataPath,'FileCollection'),                       //动态引用路径
              workspace: tempPath                                               //工作路径
 
@@ -190,6 +211,9 @@ exports.run =function (params,callback) {
             var dDataJson = getTd(env)
             //3. create real workspace
             gu.copyDir(path.join(env.templatePackageRootPath,'Workspace'),env.workspace)
+            //3.5 load ext methods to tempEngine
+            _registerTemplateExt(env.extPath,tempEngine);
+
             //4. foreach find fom
             execFomRecurring(env,tempEngine,dDataJson)
             //7. recurring render all files to tgt

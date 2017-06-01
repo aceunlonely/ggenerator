@@ -17,6 +17,9 @@
 * node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt --debug false
 * node run.js -o addTemplate -d F:\test\ggenerator/d.zip  -p test2
 
+## how to make a template
+* read doc/howToMakeTemplate.md for details
+
 ## ide
 * vs code or vi 
 

@@ -31,3 +31,7 @@ my age is ${age}
 
 
 Number: ${1|numberPlus}
+
+
+{#juicer.register('function_name', function);}
+{#juicer.unregister('function_name');}

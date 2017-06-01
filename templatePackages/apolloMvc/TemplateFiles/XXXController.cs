@@ -15,12 +15,6 @@ using ${ddata.solution.NameSpace}.Web.Common;
 using ${ddata.solution.NameSpace}.Core.Bll;
 using ${ddata.solution.NameSpace}.Core.Common;
 using ${ddata.solution.NameSpace}.Entity;
-{# 自定义函数}
-{@helper firstLowerCase}
-    function(A) {
-        return A.replace(/(\w)/,function(v){return v.toLowerCase()});
-    }
-{@/helper}
 
 namespace ${ddata.solution.NameSpace}.Web.Areas.${data.ModelName}.Controllers
 {
@@ -33,7 +27,7 @@ namespace ${ddata.solution.NameSpace}.Web.Areas.${data.ModelName}.Controllers
             
             #region 业务代码,加载model数据源
 
-            ${'#'}endregion
+            ${test}endregion
 
             return View(model);
         }

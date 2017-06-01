@@ -23,3 +23,7 @@ exports.renderDir = function(tplDir,tgtDir,data)
 {
 
 }
+
+exports.register =function(fnName,fn){
+    juicer.register(fnName,fn);
+}
