@@ -20,6 +20,9 @@
 ## how to make a template
 * read doc/howToMakeTemplate.md for details
 
+## how to make a ddate
+* read doc/howToMakeDData.md for details
+
 ## ide
 * vs code or vi 
 
