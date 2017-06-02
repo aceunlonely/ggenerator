@@ -10,19 +10,19 @@ using Dcjet.Apollo.MvcCommon;
 using Dcjet.Framework.DataProvider;
 using Dcjet.Framework.Entity;
 using Dcjet.Framework.Helpers;
-using %NameSpace%Web.Areas.%MVC-MODULE%.Models;
-using %NameSpace%Web.Common;
-using %NameSpace%Core.Bll;
-using %NameSpace%Core.Common;
-using %NameSpace%Entity;
+using ${ddata.solution.NameSpace}.Web.Areas.${data.ModelName}.Models;
+using ${ddata.solution.NameSpace}.Web.Common;
+using ${ddata.solution.NameSpace}.Core.Bll;
+using ${ddata.solution.NameSpace}.Core.Common;
+using ${ddata.solution.NameSpace}.Entity;
 
-namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
+namespace ${ddata.solution.NameSpace}.Web.Areas.${data.ModelName}.Controllers
 {
-    public class %ClassName%Controller : %NameSpaceOnly%BaseController
+    public class ${data.Name}Controller : ${ddata.solution.NameSpace}BaseController
     {
-        private readonly %ClassName%Blo _%ClassNameObj%Blo = new %ClassName%Blo();
-        [PermissionFilter(PageCode = "%CH-Index-PageCode%")]
-        public ActionResult Index(%ClassName%IndexModel model)
+        private readonly ${data.Name}Blo _${data.Name|firstLowerCase}Blo = new ${data.Name}Blo();
+        [PermissionFilter(PageCode = "${data.PageCode}")]
+        public ActionResult Index(${data.Name}IndexModel model)
         {
             #region 业务代码,加载model数据源
 
@@ -37,11 +37,11 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult LoadIndexData(%ClassName%IndexModel model)
+        public JsonResult LoadIndexData(${data.Name}IndexModel model)
         {
 
             var pagedParames = GetParedPagedParameters(model);
-            var result = _%ClassNameObj%Blo.Select(pagedParames);
+            var result = _${data.Name|firstLowerCase}Blo.Select(pagedParames);
 
             return Json(result);
         }
@@ -51,7 +51,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
         /// </summary>
         /// <param name="model">model</param>
         /// <returns>查询条件</returns>
-        public PagedParameters GetParedPagedParameters(%ClassName%IndexModel model)
+        public PagedParameters GetParedPagedParameters(${data.Name}IndexModel model)
         {
             var pagedParames = new PagedParameters();
             var listWhere = new List<WhereParams>();
@@ -59,7 +59,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
             #region 业务代码,拼装查询条件
           
             #endregion
-            pagedParames.TableName = "%TableName%";
+            pagedParames.TableName = "${data.DataSourceName}";
             pagedParames.WhereParamsList = listWhere;
             pagedParames.PagedOrderColumns = "INSERT_TIME desc";
             pagedParames.PageIndex = model.SearchEntity._PageIndex.Value;
@@ -72,7 +72,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
 
         %MVC-HTML-HeadEdit%
 
-        public ActionResult OutHead(%ClassName%EditModel model)
+        public ActionResult OutHead(${data.Name}EditModel model)
         {
             RetriveEditData(model);
             return View(model);
@@ -82,7 +82,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
         /// 加载修改的数据
         /// </summary>
         /// <param name="model"></param>
-        public void RetriveEditData(%ClassName%EditModel model)
+        public void RetriveEditData(${data.Name}EditModel model)
         {
             #region  业务代码,加载model数据源
             
@@ -91,7 +91,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
            if (!string.IsNullOrEmpty(model.ID))
             {
                 //根据ID获取实体信息
-                model.%ClassNameObj% = _%ClassNameObj%Blo.Select(model.ID);
+                model.${data.Name|firstLowerCase} = _${data.Name|firstLowerCase}Blo.Select(model.ID);
 				#region 业务代码，如果页面有AutoComplete则需要对Model中对应的Name属性赋值
 				#endregion
 			}
@@ -99,7 +99,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(%ClassName%EditModel model, FormCollection formCollection)
+        public ActionResult Edit(${data.Name}EditModel model, FormCollection formCollection)
         {
             var result = EditDetail(model);
             return Json(result);
@@ -110,7 +110,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public Result EditDetail(%ClassName%EditModel model)
+        public Result EditDetail(${data.Name}EditModel model)
         {
 
 
@@ -120,16 +120,16 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
                
                 #endregion
 
-               return _%ClassNameObj%Blo.Insert(model.%ClassNameObj%);               
+               return _${data.Name|firstLowerCase}Blo.Insert(model.${data.Name|firstLowerCase});               
             }
             else
             {
-                var updateEntity = _%ClassNameObj%Blo.Select(model.ID);
+                var updateEntity = _${data.Name|firstLowerCase}Blo.Select(model.ID);
                 #region 业务代码，将Model中的实体属性赋值到更新实体上
                 %MVC_CONTROLLEREDITPROPERTY%
                 #endregion
 
-                return _%ClassNameObj%Blo.Update(updateEntity);
+                return _${data.Name|firstLowerCase}Blo.Update(updateEntity);
             }
 
 
@@ -145,7 +145,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
         public ActionResult Delete(string oid)
         {
             //这里写删除业务
-            var result = _%ClassNameObj%Blo.Delete(oid);
+            var result = _${data.Name|firstLowerCase}Blo.Delete(oid);
             return Json(result);
         }
 
@@ -160,7 +160,7 @@ namespace %NameSpace%Web.Areas.%MVC-MODULE%.Controllers
         {
             //这里写删除业务
             var arrayOids = oids.Split(',').ToList();
-            var res = _%ClassNameObj%Blo.Delete(arrayOids);
+            var res = _${data.Name|firstLowerCase}Blo.Delete(arrayOids);
             return Json(res);
         }
 		

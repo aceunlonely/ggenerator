@@ -20,9 +20,9 @@
     </NODE>
     <!--web-->
     <!--controller-->
-    <!--<NODE>
-        <SOURCE>XXXController.cs</SOURCE>
+    <NODE>
+        <SOURCE>Web/Index/Controllers/XXXController.cs</SOURCE>
         <TARGET>${ddata.solution.NameSpace}.Web/Controllers/${data.Name}Controller.cs</TARGET>
         <DATA>${data.originString}</DATA>
-    </NODE>-->
+    </NODE>
 </FOM>
