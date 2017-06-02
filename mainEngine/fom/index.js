@@ -4,6 +4,11 @@ var gu= require('ggenerator-utils')
 
 
 
+var isArray = function (object) {
+            return object && typeof object === 'object' &&
+                Array == object.constructor;
+        };
+
 var endWith=function(str,s){
   if(s==null||s==""||str.length==0||s.length>str.length)
      return false;
@@ -76,8 +81,11 @@ var exe =function(fom,env,templateEngine,renderJson){
     //env.workspace = env.workspace.replace(new RegExp("\\","gm"),"/") ;;
     //env.tgt = env.tgt.replace(new RegExp("\\","gm"),"/") ;;
     //解析处理
-    for(var index in fom.FOM.NODE){
-        var node = fom.FOM.NODE[index]
+    var array = fom.FOM.NODE
+    if(!isArray(array))
+        array = fom.FOM
+    for(var index in array){
+        var node = array[index]
         var op = 'COPY'
         if(node['OPERATE'])
         {
@@ -119,7 +127,10 @@ var exe =function(fom,env,templateEngine,renderJson){
                     newRenderJson.data = eval("renderJson." + data);
                     //record data's dataString
                     if(newRenderJson.data)
-                        newRenderJson.data.orignString = data
+                    {
+                        newRenderJson.data.originString = data
+                        newRenderJson.data.toString = data
+                    }
                     templateEngine.renderFile(src,tgt,newRenderJson)
                 }
                 else
@@ -150,8 +161,10 @@ var exe =function(fom,env,templateEngine,renderJson){
                     var newRenderJson = JSON.parse(JSON.stringify(renderJson));
                     newRenderJson.data = eval("renderJson." + data);
                     //record data's dataString
-                    if(newRenderJson.data)
+                    if(newRenderJson.data){
                         newRenderJson.data.orignString = data
+                        newRenderJson.data.toString = data
+                    }
                     templateEngine.renderFile(src,tgt,newRenderJson)
                     // var newJson =eval("renderJson." + data);
                     // templateEngine.renderFile(src,tgt,newJson)

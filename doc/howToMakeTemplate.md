@@ -102,3 +102,4 @@ PS: template engine object has these objects (use like :${ddata.name} )
         d : d is short for ddate
 
         data.orignString : data.orignString is the string value from <DATA>
+        data.toString :  data.toString === data.orignString 
