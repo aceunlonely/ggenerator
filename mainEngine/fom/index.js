@@ -1,6 +1,6 @@
 var fs = require('fs')
 var path =require('path')
-var gu= require('ggenerator-utils')
+var gu= require('../ggenerator-utils')
 
 
 

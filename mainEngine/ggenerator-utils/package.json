@@ -1,0 +1,14 @@
+{
+  "name": "ggenerator-utils",
+  "version": "1.0.0",
+  "description": "common utils",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "xyliu",
+  "license": "MIT"
+}

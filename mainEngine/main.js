@@ -1,6 +1,6 @@
 var compress = require('./compress')
 var tempEngine = require('./templateEngine')
-var gu= require('ggenerator-utils')
+var gu= require('./ggenerator-utils')
 var fs = require('fs')
 var path =require('path')
 var fom= require('./fom')
