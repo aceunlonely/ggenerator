@@ -3,7 +3,7 @@
 ## how to install 
 * of course  npm install 
 * cd directories to npm install (mainEngine and mainEngine/compress ..)
-* copy dirs in node_modules_git to node_modules
+* // copy dirs in node_modules_git to node_modules
 
 ## how to test 
 * node test.js -t compress
