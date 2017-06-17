@@ -2,7 +2,7 @@
   "name": "ggenerator",
   "version": "1.0.0",
   "description": "all of gg",
-  "main": "run.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
