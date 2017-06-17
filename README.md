@@ -2,7 +2,7 @@
 
 ## how to install 
 * of course  npm install 
-* cd directories to npm install (mainEngine and mainEngine/compress ..)
+* cd directories to npm install (mainEngine , mainEngine/compress , mainEngine/templageEngine )
 * // copy dirs in node_modules_git to node_modules
 
 ## how to test 
