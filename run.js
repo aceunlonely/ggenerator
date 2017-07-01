@@ -9,6 +9,7 @@ program.version('0.0.1')
     .option('-t --targetPath [value]', '目标地址')
     .option('-u --debug <debug>', 'debug use', /^(true|false)$/i, "false")
     .option('-o --operation <exe>', 'operation', 'exe')
+    .option('-w --workplace [value]', '工作目录')
     .parse(process.argv);
 
 
@@ -18,7 +19,8 @@ switch (program.operation) {
             dDataPath: program.data,
             templatePackage: program.templateName,
             targetPath: program.targetPath,
-            debug: program.debug == 'true'
+            debug: program.debug == 'true',
+            workplace : program.workplace
         }
 
         if (program.debug == 'true') {

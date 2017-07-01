@@ -13,9 +13,15 @@
 * node test.js -t fom
 
 ## how to use 
+### cli
 * cd [workspace]
 * node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt --debug false
+* node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt -w 工作目录 --debug false
 * node run.js -o addTemplate -d F:\test\ggenerator/d.zip  -p test2
+
+### as npm package
+* add ggenerate to your node_modules
+* required('ggenerate').run(dDataPath,template,targetPath,workplace,callback)
 
 ## how to make a template
 * read doc/howToMakeTemplate.md for details

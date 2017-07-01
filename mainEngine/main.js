@@ -166,6 +166,7 @@ exports.run =function (params,callback) {
     var tpName = params.templatePackage
     var tgtPath = params.targetPath
     var isDebug = params.debug || false
+    var workplace = params.workplace
 
     if(config.isTest)
     {
@@ -175,10 +176,28 @@ exports.run =function (params,callback) {
         isDebug =true
     }
     //-1. check params
-    if(!fs.existsSync(path.join(path.dirname(__dirname),'templatePackages',tpName))){ throw new Error("gg does not have the templatePackage : " + tpName)}
+    var absoluteTpPath = null;
+    if(path.isAbsolute(tpName))
+    {
+        absoluteTpPath = tpName;
+    }
+    else
+    {
+        absoluteTpPath = path.join(path.dirname(__dirname),'templatePackages',tpName);
+    }
+    if(!fs.existsSync(absoluteTpPath)){ throw new Error("gg does not have the templatePackage : " + tpName)}
 
     //0. create folder of workplace
     var wp = path.join(path.dirname(__dirname),config.workplace)
+    if(workplace)
+    {
+        //if param has workplace，use it
+        wp=workplace
+        if(path.existsDir(wp))
+        {
+            path.mkdirSync(wp);
+        }
+    }
     var nwp= path.join(wp,Date.now().toString())
     fs.mkdirSync(nwp)
     //dData
@@ -194,11 +213,11 @@ exports.run =function (params,callback) {
     //combine env
     var env= {
             targetPath : tgtPath,   // 目标路径
-            templatePackageRootPath : path.join(path.dirname(__dirname),'templatePackages',tpName),
+            templatePackageRootPath : absoluteTpPath,
             dynamicRootPath : dDataPath,     //动态包解压位置
 
-             refPath: path.join(path.dirname(__dirname),'templatePackages',tpName,'TemplateFiles'),    //引用路径
-             extPath: path.join(path.dirname(__dirname),'templatePackages',tpName,'Ext'),    //扩展包位置
+             refPath: path.join(absoluteTpPath,'TemplateFiles'),    //引用路径
+             extPath: path.join(absoluteTpPath,'Ext'),    //扩展包位置
              dynamicPath: path.join(dDataPath,'FileCollection'),                       //动态引用路径
              workspace: tempPath                                               //工作路径
 
