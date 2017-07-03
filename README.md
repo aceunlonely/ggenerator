@@ -21,7 +21,7 @@
 
 ### as npm package
 * add ggenerate to your node_modules
-* require('ggenerate').run(dDataPath,template,targetPath,workplace,callback)
+* require('ggenerator').run(dDataPath,template,targetPath,workplace,callback)
 
 ## how to make a template
 * read doc/howToMakeTemplate.md for details
