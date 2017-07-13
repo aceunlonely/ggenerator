@@ -193,9 +193,9 @@ exports.run =function (params,callback) {
     {
         //if param has workplace，use it
         wp=workplace
-        if(path.existsDir(wp))
+        if(!fs.existsSync(wp))
         {
-            path.mkdirSync(wp);
+            fs.mkdirSync(wp);
         }
     }
     var nwp= path.join(wp,Date.now().toString())
