@@ -193,10 +193,7 @@ exports.run =function (params,callback) {
     {
         //if param has workplace，use it
         wp=workplace
-        if(!fs.existsSync(wp))
-        {
-            fs.mkdirSync(wp);
-        }
+        gu.mkdirSync(wp)
     }
     var nwp= path.join(wp,Date.now().toString())
     fs.mkdirSync(nwp)
@@ -208,7 +205,7 @@ exports.run =function (params,callback) {
     fs.mkdirSync(tempPath)
     //tgt
     if(!tgtPath || tgtPath=='') tgtPath=path.join(nwp,'tgt')
-    if(!fs.existsSync(tgtPath)) fs.mkdirSync(tgtPath)
+    if(!fs.existsSync(tgtPath)) gu.mkdirSync(tgtPath)
 
     //combine env
     var env= {
