@@ -12,10 +12,15 @@ function innerErrFn(err)
  * achTgt  压缩文件中路径   如 ../ or test/ 
  * errfn   错误函数 
  */
-exports.run = function(source,target,achTgt,errfn)
+exports.run = function(source,target,achTgt,errfn,successFn)
 {
 	var output = fs.createWriteStream(target);
 	var archive = archiver('zip');
+
+	if(successFn)
+	{
+		output.on('close', successFn);
+	}
 	
 	if(errfn)
 	{
