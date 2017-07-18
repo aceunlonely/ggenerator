@@ -4,22 +4,34 @@ var fs = require('fs')
 //需要保留换行
 juicer.set('strip',false);
 
+var innerRp =function($,statement){
+    //console.log($);    
+    return $.substring(4,$.length-2);
+};
+
 //渲染内容
-function renderContent(tpl,data)
+function renderContent(tpl,data,isFinal)
 {
-    return juicer(tpl,data)
+    var temp =  juicer(tpl,data)
+
+    if(isFinal)
+    {
+        //支持final replace功能
+        return temp.replace(/<gg\[((?!<gg\[).)*\]>/igm,innerRp)
+    }
+    return temp;
 }
 
 
 //渲染
 exports.renderContent=renderContent;
-exports.renderFile = function(tplFile,tgtFile,data){
+exports.renderFile = function(tplFile,tgtFile,data,isFinal){
     var content = fs.readFileSync(tplFile,'utf-8');
-    var r = juicer(content,data)
+    var r = renderContent(content,data,isFinal)
 
     fs.writeFileSync(tgtFile,r)
 };
-exports.renderDir = function(tplDir,tgtDir,data)
+exports.renderDir = function(tplDir,tgtDir,data,isFinal)
 {
 
 }

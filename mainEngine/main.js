@@ -153,7 +153,7 @@ var execRenderRecurring = function(workspace,tgt,templateEngine,renderJson){
             }
             else
             {
-                templateEngine.renderFile(workspace +'/' + file,tgt + '/' + file,renderJson)
+                templateEngine.renderFile(workspace +'/' + file,tgt + '/' + file,renderJson,true)
             }
         })
     }
@@ -350,6 +350,16 @@ exports.test = function (params) {
             console.log(path.dirname(path.dirname(path.dirname('dir1/dir2/dir/1.txt'))) + '\n')
             console.log(path.dirname(path.dirname(path.dirname(path.dirname('dir1/dir2/dir/1.txt')))) + '\n')
             console.log(path.dirname(path.dirname(path.dirname(path.dirname(path.dirname('dir1/dir2/dir/1.txt'))))) + '\n')
+            break;
+        case 'regReplace':
+        case 'reg':
+            var iFn =function($,statement){
+                //console.log($);
+                //console.log(statement);
+                return $.substring(4,$.length-2);
+            };
+            var tpl ='$$$<gg[{aa]>dog<gg[bb}]>';
+            console.log(tpl.replace(/<gg\[((?!<gg\[).)*\]>/igm, iFn));
             break;
         default:
         break;

@@ -2,7 +2,7 @@
 |--Config
     |--index.json
 |--Ext
-    |--index.json
+    |--index.js
 |--TemplateFiles
     ..
 |--Workspace
@@ -16,7 +16,7 @@
     "company" : "超级高手集合"
     }
 
-## Ext/index.json  is for ext for engine
+## Ext/index.js  is for ext for engine
     // should be a map
     var _templateEngineExt= {};
 
@@ -24,8 +24,6 @@
     _templateEngineExt.firstLowerCase = function(A){
         return A.replace(/(\w)/,function(v){return v.toLowerCase()});
     }
-
-
 
     // this is for templateEngine Ext to register
     exports.templateEngineExt = _templateEngineExt;
