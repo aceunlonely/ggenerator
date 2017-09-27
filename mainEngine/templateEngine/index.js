@@ -28,6 +28,7 @@ exports.renderContent = renderContent;
 exports.renderFile = function (tplFile, tgtFile, data, isFinal) {
     //忽略对某些后缀文件的渲染工作
     if (config.renderIgnoreFileTypes && ggUtil.is_filetype(tplFile, config.renderIgnoreFileTypes)) {
+        fs.writeFileSync(tgtFile, fs.readFileSync(tplFile))
         return
     }
     var content = fs.readFileSync(tplFile, 'utf-8');
