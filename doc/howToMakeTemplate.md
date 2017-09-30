@@ -85,7 +85,20 @@
     you can make a dynamic fom by template pattern 
 
     <SOURCE>gf.txt</SOURCE>  means gf.txt from TemplateFiles dir by operation COPY , when operation is RENAME or DELETE means from Workspace
-    <OPERATE>RENAME</OPERATE>  means operation is rename(COPY,DELETE,RENAME) , copy is default operation
+    <OPERATE>RENAME</OPERATE>  means operation is rename(COPY,DELETE,RENAME,COPYDIR) , copy is default operation
+        OPERATES:
+            COPY(C for short):  child NODE 'SOURCE'(S) 'TARGET'(T) is need,  
+                SOURCE can be start with './'，'$d/' or ''
+                    './' means find your file in current workspace
+                    '$d/' means find your file in dynamicPath
+                    '' means find your file in templatePath
+                TARGET can be start with '../' or ''
+                    '../' means previous directory on the path of fom
+                    '' means the root dir of workspace
+            DELETE(D for short): child NODE 'TARGET'(T) is need
+            RENAME(R for short): child NODE 'SOURCE'(S) 'TARGET'(T) is need
+            COPYDIR(CD for short): just like COPY
+
     <SOURCE>$d/import.xls</SOURCE> means import.xls from ddate/FileCollection 
     <SOURCE>./orgin.xls</SOURCE>  means orgin.xls from real Workspace dir
 

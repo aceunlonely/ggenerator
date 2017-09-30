@@ -92,7 +92,34 @@ var exe =function(fom,env,templateEngine,renderJson){
             op= node['OPERATE']
         }
         switch(op.toUpperCase())
-        {
+        {   
+            case 'CD':
+            case 'COPYDIR':
+                var src=node["SOURCE"] || node["S"]
+                var tgt=node["TARGET"] || node["T"]
+                if(!src) throw new Error("fom: when COPYDIR src is not nullable ")
+                if(!tgt) throw new Error("fom: when COPYDIR tgt is not nullable ")
+                if(startWith(src,'./'))
+                {
+                    src = path.join(env.workspace,src.substr(2))
+                }
+                else if(startWith(src,'$d/'))
+                {
+                    src = path.join(env.dynamicPath,src.substr(3))
+                }
+                else
+                {
+                    src = path.join(env.refPath,src)
+                }
+                tgt =  getRigthTgt(env.workspace,tgt)
+                if(!fs.existsSync(path.dirname(tgt)))
+                {
+                    gu.mkdirSync(path.dirname(tgt));
+                    //fs.mkdirSync(path.dirname(tgt));
+                }
+                //copy dir
+                gu.copyDir(src,tgt)
+                break;
             //COPY
             case 'C':
             case 'COPY':
@@ -154,6 +181,12 @@ var exe =function(fom,env,templateEngine,renderJson){
                 if(!tgt) throw new Error("fom: when copy tgt is not nullable ")
                 src = path.join(env.workspace,src)
                 tgt = getRigthTgt(env.workspace,tgt) //path.join(env.workspace,tgt)
+
+                if(!fs.existsSync(path.dirname(tgt)))
+                {
+                    gu.mkdirSync(path.dirname(tgt));
+                    //fs.mkdirSync(path.dirname(tgt));
+                }
                  //DATA 情况
                 var data = node["DATA"]
                 if(data)
