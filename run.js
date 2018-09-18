@@ -3,7 +3,7 @@ var program = require('commander');
 
 //  node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt
 //get params
-program.version('0.0.1')
+program.version('1.0.0')
     .option('-d --data [value]', '动态数据包路径,或者模板路径', 'null')
     .option('-p --templateName [value]', '模板名')
     .option('-t --targetPath [value]', '目标地址')
@@ -50,3 +50,4 @@ switch (program.operation) {
         me.addTemplate(p)
         break;
 }
+

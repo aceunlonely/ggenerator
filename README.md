@@ -16,7 +16,7 @@
 ### cli
 * cd [workspace]
 * node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt --debug false
-* node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt -w 工作目录 --debug false
+* node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt -w F:\test\ggenerator\workspace --debug false
 * node run.js -o addTemplate -d F:\test\ggenerator/d.zip  -p test2
 
 ### as npm package
@@ -34,4 +34,4 @@
 
 
 ## node env 
-* v6.2.2
+* v6.2.2+
