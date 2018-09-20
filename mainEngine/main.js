@@ -3,7 +3,7 @@ var tempEngine = require('./templateEngine')
 var gu= require('ggenerator-utils')
 var fs = require('fs')
 var path =require('path')
-var fom= require('./fom')
+var fom= require('ggenerator-fom')
 var config=require('../config')
 var xml2js = require('xml2js');
 
