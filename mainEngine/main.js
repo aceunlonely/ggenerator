@@ -1,4 +1,4 @@
-var compress = require('./compress')
+var compress = require('ggenerator-compress')
 var tempEngine = require('./templateEngine')
 var gu= require('ggenerator-utils')
 var fs = require('fs')
