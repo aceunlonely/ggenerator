@@ -1,7 +1,7 @@
 var juicer = require('juicer')
 var fs = require('fs')
 var config = require('../../config')
-var ggUtil = require('../ggenerator-utils')
+var ggUtil = require('ggenerator-utils')
 
 //需要保留换行
 juicer.set('strip', false);
