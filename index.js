@@ -1,4 +1,6 @@
-var me = require('./mainEngine')
+//var me = require('./mainEngine')
+
+var me = require('ggenerator-engine')
 require('./config')
 
 exports.run = function(dDataPath,template,targetPath,workplace,callback){

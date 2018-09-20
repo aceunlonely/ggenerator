@@ -1,9 +1,10 @@
 
 
 var config={
-    workplace : "workplace",
+    workplaceDefaultPath : __dirname + "/workplace",
     isTest : false,
-    renderIgnoreFileTypes : "zip,rar,7z,tar,gz,iso,doc,docx,pdf,wps,odf,png,gif,jpg"
+    renderIgnoreFileTypes : "zip,rar,7z,tar,gz,iso,doc,docx,pdf,wps,odf,png,gif,jpg",
+    templatePackagesDefaultPath : __dirname + "/templatePackages"
 }
 
 //console.log('config')

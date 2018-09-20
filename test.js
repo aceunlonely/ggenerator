@@ -1,5 +1,7 @@
 require('./config')
-var me = require('./mainEngine')
+//var me = require('./mainEngine')
+var me = require('ggenerator-engine')
+
 var program = require('commander');
 
 
