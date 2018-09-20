@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<FOM>
-    <!--entity-->
-    <NODE>
-        <SOURCE>module.fom</SOURCE>
-        <TARGET>module.fom</TARGET>
-        <DATA>ddata</DATA>
-    </NODE>
-</FOM>
