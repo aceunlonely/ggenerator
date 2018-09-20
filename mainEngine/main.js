@@ -1,10 +1,10 @@
 var compress = require('ggenerator-compress')
-var tempEngine = require('./templateEngine')
+var tempEngine = require('ggenerator-template-engine')
 var gu= require('ggenerator-utils')
 var fs = require('fs')
 var path =require('path')
 var fom= require('ggenerator-fom')
-var config=require('../config')
+var config=require('peeriocjs').invoke("config").sync.config() //require('../config')
 var xml2js = require('xml2js');
 
 var builder = new xml2js.Builder();  // JSON->xml

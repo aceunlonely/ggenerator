@@ -1,5 +1,7 @@
+require('./config')
 var me = require('./mainEngine')
 var program = require('commander');
+
 
 //  node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt
 //get params

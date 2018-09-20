@@ -10,7 +10,9 @@
     "commander": "^2.9.0",
     "ggenerator-compress": "^1.0.0",
     "ggenerator-fom": "^1.0.0",
-    "ggenerator-utils": "^1.0.0"
+    "ggenerator-template-engine": "^1.0.0",
+    "ggenerator-utils": "^1.0.0",
+    "peeriocjs": "^2.2.0"
   },
   "devDependencies": {},
   "scripts": {

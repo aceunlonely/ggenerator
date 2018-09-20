@@ -1,4 +1,5 @@
 var me = require('./mainEngine')
+require('./config')
 
 exports.run = function(dDataPath,template,targetPath,workplace,callback){
     var p = {

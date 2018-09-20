@@ -1,3 +1,5 @@
+
+
 var config={
     workplace : "workplace",
     isTest : false,
@@ -6,4 +8,6 @@ var config={
 
 //console.log('config')
 
-module.exports= config
+require('peeriocjs').reg("config",function(){return config;})
+
+//module.exports= config

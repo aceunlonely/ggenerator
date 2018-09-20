@@ -1,3 +1,4 @@
+require('./config')
 var me = require('./mainEngine')
 var program = require('commander');
 
