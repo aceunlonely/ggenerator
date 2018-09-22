@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FOM>
+    {@each ddata.gf as g, index}
+    <NODE>
+	<SOURCE>gf.txt</SOURCE>
+	<TARGET>${g.name}.txt</TARGET>
+    <DATA>ddata.gf[${index}]</DATA>
+    </NODE>
+    {@/each}
+</FOM>
