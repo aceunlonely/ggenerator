@@ -35,3 +35,6 @@
 
 ## node env 
 * v6.2.2+
+
+## config
+all config in ./config.json

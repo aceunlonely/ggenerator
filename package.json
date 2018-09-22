@@ -9,7 +9,7 @@
   "dependencies": {
     "commander": "^2.9.0",
     "ggenerator-engine": "^1.0.0",
-    "peeriocjs": "^2.2.0"
+    "peeriocjs": "^2.4.0"
   },
   "devDependencies": {},
   "scripts": {
