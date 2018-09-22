@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FOM>
+    <NODE>
+        <SOURCE>gf.fom</SOURCE>
+        <TARGET>gf/gf.fom</TARGET>
+    </NODE>
+    <NODE>
+        <SOURCE>hobby.fom</SOURCE>
+        <TARGET>hobby/hobby.fom</TARGET>
+    </NODE>
+    <NODE>
+        <SOURCE>./readme.md</SOURCE>
+        <TARGET>readme_${ddata.name}.md</TARGET>
+        <OPERATE>RENAME</OPERATE>
+    </NODE>
+
+    <NODE>
+        <SOURCE>$d/addFile.txt</SOURCE>
+        <TARGET>addFile.txt</TARGET>
+        <OPERATE>COPY</OPERATE>
+    </NODE>
+</FOM>

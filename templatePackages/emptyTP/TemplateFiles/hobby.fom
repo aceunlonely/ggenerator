@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FOM>
+    {@each ddata.hobbies as h, index}
+    <NODE>
+	<SOURCE>hobby.txt</SOURCE>
+	<TARGET>${h.name}.txt</TARGET>
+    <DATA>ddata.hobbies[${index}]</DATA>
+    </NODE>
+    {@/each}
+
+    <NODE>
+        <SOURCE>tf1.cs</SOURCE>
+        <TARGET>../hobby.tpl</TARGET>
+    </NODE>
+</FOM>
