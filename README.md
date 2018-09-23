@@ -93,7 +93,9 @@ structure:
             ..
 ```
 ## what is uiddata
-
+when you use comboTemplate(of course not only ct),ddata is in the template.
+we must need change some data,it is uiddta
+details @ doc/uiddata.md
 
 ## ide
 * vs code or vi 

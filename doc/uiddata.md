@@ -29,7 +29,7 @@ nornal like:
     "json2": "???"
 }
 ```
-## uiddata.json
+## uiddata.js
 ```javascript
 // write any sync code as you like
 console.log("here is uiddata logic")
