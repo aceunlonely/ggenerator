@@ -40,6 +40,7 @@ and more in examples:
 * cd [workspace]
 * node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt --debug false
 * node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt -w F:\test\ggenerator\workspace --debug false
+* node run.js -d F:\temp\ggenerator/ddata.zip -p test -t F:\temp\ggenerator\tgt -w F:\temp\ggenerator\wp -u false
 * node run.js -o addTemplate -d F:\test\ggenerator/d.zip  -p test2
 
 ### as npm package

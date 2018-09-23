@@ -5,6 +5,7 @@ config.workplaceDefaultPath = config.workplaceDefaultPath || (__dirname + "/work
 config.isTest = false
 config.renderIgnoreFileTypes =  config.renderIgnoreFileTypes||  "zip,rar,7z,tar,gz,iso,doc,docx,pdf,wps,odf,png,gif,jpg"
 config.templatePackagesDefaultPath = config.templatePackagesDefaultPath || __dirname + "/templatePackages"
+config.verbose = config.verbose || true
 
 // var config={
 //     workplaceDefaultPath : __dirname + "/workplace",

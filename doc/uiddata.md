@@ -15,7 +15,7 @@ nornal like:
 ## uiddata.json
 ```javascript
 {
-    "name" : "???",
+    "name" : "???(string)[rue]这里填写你的名字",
     "age" : "???",
     "isMan" : "???",
     "hobby": "basketball",
@@ -54,7 +54,9 @@ var r = function(){
 ## how it work
 uiddata engine will render uiddata.json and run uiddata.js
 uiddata.json: ??? will need your input
-    1. ue(uiddata engine) will ask you like 'pliz input your name:'
+    1. ue(uiddata engine) will ask you like 
+        'pliz input your name: string 这里填写你的名字
+         name : (rue)'
     2. you can input like(choose one)
         a.    (string)apporoad  
         b.    (number)100 
