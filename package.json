@@ -8,8 +8,9 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "ggenerator-engine": "^1.0.0",
-    "peeriocjs": "^2.4.0"
+    "ggenerator-engine": "^1.1.0",
+    "peeriocjs": "^2.4.0",
+    "uicli.js": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -28,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/aceunlonely/ggenerator/issues"
   },
-  "homepage": "https://github.com/aceunlonely/ggenerator#readme"
+  "homepage": "https://github.com/aceunlonely/ggenerator#readme",
+  "bin": {
+    "gg": "./bin/gg"
+  }
 }

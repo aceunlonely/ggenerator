@@ -86,4 +86,4 @@ uiddata.json: ??? will need your input
     10. then be omitted
 
 ## lets try it
-    todo 
+    you can try it @ uicli.js
