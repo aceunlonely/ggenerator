@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <FOM>
     <NODE>
-        <SOURCE>gf.fom</SOURCE>
-        <TARGET>gf/gf.fom</TARGET>
+        <!--copy tf/ref.fom to w/ref-->
+        <SOURCE>ref.fom</SOURCE>
+        <TARGET>ref/wref.fom</TARGET>
     </NODE>
     <NODE>
-        <SOURCE>hobby.fom</SOURCE>
-        <TARGET>hobby/hobby.fom</TARGET>
+        <!--copy ddata/fc/readme.md to w/ref-->
+        <SOURCE>$d/readme.md</SOURCE>
+        <TARGET>readme_ddata.md</TARGET>
     </NODE>
     <NODE>
+        <!--RENAME w/readme.md to w/readme_w.md-->
         <SOURCE>./readme.md</SOURCE>
-        <TARGET>readme_${ddata.name}.md</TARGET>
+        <TARGET>readme_w.md</TARGET>
         <OPERATE>RENAME</OPERATE>
     </NODE>
-
+    <!--dynamic file-->
+    {@if d.dynamicFile }
     <NODE>
-        <SOURCE>$d/addFile.txt</SOURCE>
-        <TARGET>addFile.txt</TARGET>
-        <OPERATE>COPY</OPERATE>
+        <!--copy tf/any.txt to w/dynamic.txt-->
+        <SOURCE>any.txt</SOURCE>
+        <TARGET>${d.dFileName}</TARGET>
     </NODE>
+    {@/if}
 </FOM>

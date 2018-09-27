@@ -1,10 +1,10 @@
-#main
+<gg[#]> main
 files here will be used by fom:
 
-## how to use
+<gg[##]> how to use
 ```xml
 <NODE>
-    <SOURCE>$d/readme.md</SOURCE>
+    <SOURCE><gg[$]>d/readme.md</SOURCE>
     <TARGET>readme.md</TARGET>
     <OPERATE>COPY</OPERATE>
 </NODE>

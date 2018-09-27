@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FOM>
+    <NODE>
+        <TARGET>../tobeDeleted.md</TARGET>
+        <OPERATE>DELETE</OPERATE>
+    </NODE>
+</FOM>
