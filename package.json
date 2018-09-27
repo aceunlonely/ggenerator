@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "ggenerator-engine": "^1.2.0",
+    "ggenerator-engine": "^1.4.0",
     "peeriocjs": "^2.4.0",
     "uicli.js": "^1.0.0"
   },

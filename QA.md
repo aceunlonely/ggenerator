@@ -5,3 +5,9 @@
     可以使用最终替换实现： 
         1、设置template/Ext 扩展   详见howToMakeTemplate.md/Ext/index.js
         2、书写格式如：   <gg[]>   (  $<gg[]>{dolloer}  或者 $<gg[{dolloer}]>  随意都可以 )
+
+3、有些.fom文件不想进行fom处理，怎么办
+    在Template/Config json中添加以下节点：
+    "fom" :{
+        "ignore" : ["fom名字.fom"]
+    }

@@ -1,27 +1,25 @@
-this is a document of readme.
+<gg[#]> help
+<gg[##]> structure:
+{@if !d.isCombo}
+    |--DData
+    |--Template
+{@/if}
+{@if d.isCombo}
+    |--Template
+        |--TDData
+{@/if}
 
+<gg[#]> en
+    (T)DData : here is dynamic data for your Template, ddata + template => your Target files
+    Template : here is fixed Template
 
+<gg[##]> how to use 
+    cd currentDir
+    gg Tempalte {@if !d.isCombo}DData{@/if} -t Target -w Workplace
 
-my name is  ${ddata.name}
+<gg[#]> 中文说明
+    (T)DData : 存放动态数据，动态数据一般由用户自己编辑，也可以通过其他系统生成，与模板（Template）格式对应， 通过gg引擎，结合模板和动态数据生成目标文件
+    Template ： 模板
 
-i have  ${ddata.hobbies.length} hobbies, they are :
-{@each ddata.hobbies as hobby, index}
-   ${index}  |  name:${hobby.name} | weight: ${hobby.weight}
-{@/each}
-
-
-=====================================================================
-
-i have also ${ddata.gf.length} gfs , they are :
-{@each ddata.gf as g, index}
-   ${index}  |  name:${g.name} | hp: ${g.hp} | mp : ${g.mp}
-{@/each}
-
-
-=test tc=====================================================================
-${tc.version}   |  ${tConfig.company}
-
-
-
-=test dc=====================================================================
-${dc.author}    |  ${dConfig.age}
+<gg[#]> PS
+    more details in subDirs

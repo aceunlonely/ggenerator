@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FOM>
+    <NODE>
+        <SOURCE>Template</SOURCE>
+        <TARGET>${d.name}</TARGET>
+        <OPERATE>CD</OPERATE>
+    </NODE>
+    {@if d.isCombo }
+    <NODE>
+        <SOURCE>DData</SOURCE>
+        <TARGET>${d.name}/TDData</TARGET>
+        <OPERATE>CD</OPERATE>
+    </NODE>
+    {@/if}
+    {@if !d.isCombo }
+    <NODE>
+        <SOURCE>DData</SOURCE>
+        <TARGET>DData</TARGET>
+        <OPERATE>CD</OPERATE>
+    </NODE>
+    {@/if}
+</FOM>

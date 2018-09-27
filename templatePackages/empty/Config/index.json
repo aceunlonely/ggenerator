@@ -1,4 +1,7 @@
 {
     "version" : "1.0.0",
-    "God" : "LiSA"
+    "God" : "LiSA",
+    "fom" :{
+        "ignore" : ["ref.fom","main.fom"]
+    }
 }

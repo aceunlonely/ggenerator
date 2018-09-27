@@ -1,0 +1,18 @@
+{
+    "dynamicFile" : "???(b)[true]是否需要生成动态文件？",
+    "dFileName" : "???(s)[dynamic.txt]动态文件名字",
+    "lover" : {
+        "name" : "LiSA",
+        "age" :32
+    },
+    "hobbies" : [
+        {
+            "name" : "sing",
+            "weight" :99
+        },
+        {
+            "name" :"dance",
+            "weight" : 30
+        }
+    ]
+}
