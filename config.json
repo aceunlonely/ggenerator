@@ -1,6 +1,10 @@
 {
-    "workplaceDefaultPath":null, 
-    "templatePackagesDefaultPath":null,
-    "renderIgnoreFileTypes":"zip,rar,7z,tar,gz,iso,doc,docx,pdf,wps,odf,png,gif,jpg",
-    "verbose" :true
+  "config": [
+    {
+      "workplaceDefaultPath": null,
+      "templatePackagesDefaultPath": null,
+      "renderIgnoreFileTypes": "zip,rar,7z,tar,gz,iso,doc,docx,pdf,wps,odf,png,gif,jpg",
+      "verbose": true
+    }
+  ]
 }
