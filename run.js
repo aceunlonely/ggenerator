@@ -22,12 +22,13 @@ program.version('1.0.0')
     + '\r\n\t-p tepmlateName'
     + '\r\n\ttepmlateName'
     + '\r\n\ttepmlateName ddata'
-    + '\r\n\t-o config')
+    + '\r\n\t-o config'
+    + '\r\n\t-o ls')
     .option('-d --data [value]', '\r\n\t可空\r\n\t动态数据包路径,支持ddata文件夹,ddataZip,DataObject文件夹\r\n\t支持单个数据源JSON或者js，并支持相对路径\r\n\t空值时,说明调用的combo模板的TDData', null)
     .option('-p --templateName [value]', '模板名，或者模板文件夹路径、或者模板zip路径，并支持相对路径')
     .option('-t --targetPath [value]', '目标地址,支持相对路径，空值时，为当前路径' + currentPath ,"./","./")
     .option('-u --debug <debug>', 'debug use', /^(true|false)$/i, "false")
-    .option('-o --operation <exe>', '\r\n\t(default:exe)\r\n\texe:生成\r\n\tconfig:配置', 'exe')
+    .option('-o --operation <exe>', '\r\n\t(default:exe)\r\n\texe:生成\r\n\tconfig:配置\r\n\tls:list所有模板', 'exe')
     .option('-w --workplace [value]', '工作目录,支持相对路径，默认值是全局配置:' + config.workplaceDefaultPath)
     .parse(process.argv);
 
@@ -52,13 +53,15 @@ program.version('1.0.0')
     }
     //相对目录支持
     if(p.templatePackage && !path.isAbsolute(p.templatePackage)){
-        if(fs.existsSync(path.join(currentPath,p.templatePackage))){
-            p.templatePackage = utils.getRigthTgt(currentPath,p.templatePackage)
+        var tpath = utils.getRigthTgt(currentPath,p.templatePackage)
+        if(fs.existsSync(tpath)){
+            p.templatePackage =  tpath
         }
     }
     if(p.dDataPath && !path.isAbsolute(p.dDataPath)){
-        if(fs.existsSync(path.join(currentPath,p.dDataPath))){
-            p.dDataPath = utils.getRigthTgt(currentPath,p.dDataPath)
+        var tpath =utils.getRigthTgt(currentPath,p.dDataPath)
+        if(fs.existsSync(tpath)){
+            p.dDataPath = tpath
         }
     }
     if(p.targetPath && !path.isAbsolute(p.targetPath)){
@@ -68,9 +71,60 @@ program.version('1.0.0')
         p.workplace = utils.getRigthTgt(currentPath,p.workplace)
     }
 
+var printTemaplates = function(){
+    const files = fs.readdirSync(config.templatePackagesDefaultPath)
+    files.forEach(function (item, index) {
+        let stat = fs.lstatSync( config.templatePackagesDefaultPath+ '/' + item)
+        if (stat.isDirectory() === true) { 
+            console.log(item)
+        }
+    })
+
+}
+var getTemaplates = function(tname){
+    var rname = null
+    var likeNames =[]
+    const files = fs.readdirSync(config.templatePackagesDefaultPath)
+    files.forEach(function (item, index) {
+        let stat = fs.lstatSync( config.templatePackagesDefaultPath+ '/' + item)
+        if (stat.isDirectory() === true) { 
+           if(tname == item)
+           {
+               return [tname,likeNames];
+           }
+           if(item.indexOf(tname) > -1){
+               likeNames.push(item)
+           } 
+        }
+    })
+    return [rname,likeNames];
+}
 
 switch (program.operation) {
     case 'exe':
+        if(!p.templatePackage)
+        {
+            printTemaplates();
+            return
+        }
+        else if(!path.isAbsolute(p.templatePackage)){
+            var [rname,likeList] = getTemaplates(p.templatePackage)
+            if(!rname)
+            {
+                if(likeList.length ==0){
+                    console.log("templateName not exits: " + p.templatePackage )
+                    return
+                }
+                else if(likeList.length ==1){
+                    console.log("tempalteName [" + p.templatePackage+"]rediret to [" + likeList[0]+ "]" )
+                    p.templatePackage =likeList[0]
+                }
+                else{
+                    console.log("one more template matches : \r\n\t" + likeList.join("  "))
+                    return
+                }
+            }
+        }
         if (program.debug == 'true') {
             console.log("ggenerator debug on")
             me.run(p, function () {
@@ -99,5 +153,11 @@ switch (program.operation) {
     case 'config':
         require('peeriocjs').invoke("setConfig").sync.setConfig();
         break;
+    case 'ls':
+    case 'list':
+        printTemaplates();
+        break;
 }
+
+
 

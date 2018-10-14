@@ -1,6 +1,7 @@
 var storage = require('mini-dbx')
 var db = storage(__dirname + '/config.json')
 var uicli = require('uicli.js')
+var fs = require('fs')
 
 var getConfig= function(){
     var config = {
@@ -24,6 +25,9 @@ var getConfig= function(){
     });
 
     config.workplaceDefaultPath = config.workplaceDefaultPath || (__dirname + "/workplace")
+    if(!fs.existsSync(config.workplaceDefaultPath)){
+        fs.mkdirSync(config.workplaceDefaultPath)
+    }
     config.isTest = false
     config.renderIgnoreFileTypes =  config.renderIgnoreFileTypes||  "zip,rar,7z,tar,gz,iso,doc,docx,pdf,wps,odf,png,gif,jpg"
     config.templatePackagesDefaultPath = config.templatePackagesDefaultPath || __dirname + "/templatePackages"
