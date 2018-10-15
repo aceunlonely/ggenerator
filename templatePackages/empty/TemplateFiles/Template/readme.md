@@ -19,7 +19,7 @@
                     "name" : "1154"
                 }
             Workspace/test.txt:
-                your tConifg.name is ${tc.name}
+                your tConifg.name is <gg[$]>{tc.name}
 <gg[#]><gg[#]><gg[#]>    Ext: ext methods for template
 
         example:
@@ -46,7 +46,7 @@ _templateEngineExt.firstLowerCase = function(A){
 exports.templateEngineExt = _templateEngineExt;
 ```
             Workspace/test.txt:
-                your ext method invoke :  ${tc.name|testOneParam}
+                your ext method invoke :  <gg[$]>{tc.name|testOneParam}
                 {<gg[@]>if testTwoParam("1",tc.name)}
                     tc.name equels 1
                 {<gg[@]>/if}
@@ -73,8 +73,8 @@ exports.templateEngineExt = _templateEngineExt;
         {<gg[@]>each ddata.gf as g, index}
         <NODE>
         <SOURCE>gf.txt</SOURCE>
-        <TARGET>${g.name}.txt</TARGET>
-        <DATA>ddata.gf[${index}]</DATA>
+        <TARGET><gg[$]>{g.name}.txt</TARGET>
+        <DATA>ddata.gf[<gg[$]>{index}]</DATA>
         </NODE>
         {<gg[@]>/each}
          <NODE>
@@ -87,7 +87,7 @@ exports.templateEngineExt = _templateEngineExt;
         </NODE>
         <NODE>
             <SOURCE>./readme.md</SOURCE>
-            <TARGET>readme_${ddata.name}.md</TARGET>
+            <TARGET>readme_<gg[$]>{ddata.name}.md</TARGET>
             <OPERATE>RENAME</OPERATE>
         </NODE>
 

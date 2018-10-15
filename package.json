@@ -10,7 +10,7 @@
     "commander": "^2.19.0",
     "ggenerator-engine": "^1.4.0",
     "history.node": "^1.0.0",
-    "mini-dbx": "^1.0.0",
+    "mini-dbx": "^1.0.2",
     "peeriocjs": "^2.4.1",
     "uicli.js": "^1.0.0"
   },
