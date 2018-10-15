@@ -42,12 +42,16 @@ and more in examples:
     we must need change some data,it is uiddta
     details @ doc/uiddata.md
 
-## node env 
-* v6.2.2+
-
 ## config
     all config in ./config.json
 
 
 ## details
     all details in doc/*
+
+
+## how to share templates Package
+    use git to share
+    git clone xxxxxxx
+    cd xxxxxx
+    gg config
