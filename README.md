@@ -55,3 +55,11 @@ and more in examples:
     git clone https://github.com/aceunlonely/ggenerator-templates
     cd ggenerator-templates
     gg config
+
+## use  history
+    npm i -g history.node
+```shell
+hist
+hist -h
+hist last
+```

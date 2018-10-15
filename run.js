@@ -1,5 +1,5 @@
 require('./config')
-
+require('history.node').record('gg')
 //reg uiddata method
 require('./uiddata')
 //var me = require('./mainEngine')
@@ -24,8 +24,7 @@ program.version('1.0.0')
     + '\r\n\ttepmlateName ddata'
     + '\r\n\t-o config'
     + '\r\n\t-o ls'
-    + '\r\n\tconfig'
-    + '\r\n\thistory last')
+    + '\r\n\tconfig')
     .option('-d --data [value]', '\r\n\t可空\r\n\t动态数据包路径,支持ddata文件夹,ddataZip,DataObject文件夹\r\n\t支持单个数据源JSON或者js，并支持相对路径\r\n\t空值时,说明调用的combo模板的TDData', null)
     .option('-p --templateName [value]', '模板名，或者模板文件夹路径、或者模板zip路径，并支持相对路径')
     .option('-t --targetPath [value]', '目标地址,支持相对路径，空值时，为当前路径' + currentPath ,"./","./")
@@ -146,10 +145,8 @@ var getTemaplates = function(tname){
     if(!p.templatePackage && program.args.length>0)
     {
         switch(program.args[0]){
-            case "history":
-                console.log("todo");
-                return
             case "config":
+                require('peeriocjs').invoke("setConfig").sync.setConfig();
                 return
         }
 
