@@ -14,7 +14,7 @@ var uicli = require('uicli.js')
  */
 ioc.reg("preMainExecuting",function(env){
     var ddataPath = path.join(env.dynamicRootPath,'DataObject')
-    console.log("aaa :" + ddataPath)
+    //console.log("aaa :" + ddataPath)
     return new Promise(function(r,j){
         function runUiddataJs(){
             if(fs.existsSync(path.join(ddataPath,"uiddata.js"))){

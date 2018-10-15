@@ -52,6 +52,6 @@ and more in examples:
 
 ## how to share templates Package
     use git to share
-    git clone xxxxxxx
-    cd xxxxxx
+    git clone https://github.com/aceunlonely/ggenerator-templates
+    cd ggenerator-templates
     gg config

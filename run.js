@@ -1,5 +1,3 @@
-import { retry } from './C:/Users/Administrator/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/async';
-
 require('./config')
 
 //reg uiddata method
@@ -48,7 +46,7 @@ program.version('1.0.0')
 
 
 
-var main = function(){
+var main = function(p){
 
     switch (program.operation) {
         case 'exe':
@@ -58,7 +56,7 @@ var main = function(){
                 return
             }
             else if(!path.isAbsolute(p.templatePackage)){
-                var [rname,likeList] = getTemaplates(p.templatePackage)
+                let [rname,likeList] = getTemaplates(p.templatePackage)
                 if(!rname)
                 {
                     if(likeList.length ==0){
@@ -131,7 +129,7 @@ var getTemaplates = function(tname){
         if (stat.isDirectory() === true) { 
            if(tname == item)
            {
-               return [tname,likeNames];
+                rname = tname
            }
            if(item.indexOf(tname) > -1){
                likeNames.push(item)
@@ -142,7 +140,7 @@ var getTemaplates = function(tname){
 }
 
 
-(function(){
+ var rr =function(){
     
     //模板未传，采用第一个参数
     if(!p.templatePackage && program.args.length>0)
@@ -181,5 +179,7 @@ var getTemaplates = function(tname){
     if(p.workplace && !path.isAbsolute(p.workplace)){
         p.workplace = utils.getRigthTgt(currentPath,p.workplace)
     }
-    main()
-})()
+    main(p)
+}
+
+rr()
