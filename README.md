@@ -22,14 +22,14 @@ and more in examples:
 ...
 
 ## how to install 
-* npm i ggenerator -g
+* npm i ggenerator.js -g
 
 ## how to use 
 ### cli
 * gg -h
 
 ### as npm package
-* require('ggenerator').run(dDataPath,template,targetPath,workplace,callback)
+* require('ggenerator.js').run(dDataPath,template,targetPath,workplace,callback)
 
 ## how to make a template package
 * gg empty
