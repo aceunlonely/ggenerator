@@ -1,5 +1,8 @@
 # ggenerator
 
+## xgenerator
+[awesome alternative of ggererator](https://github.com/apporoad/xgenerator xg)  
+
 ## i wanna tell you that
 1. what is gg(ggenerator)
     it is designed as a code generator to generate code by one data and a template,
