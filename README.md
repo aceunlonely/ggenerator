@@ -1,7 +1,8 @@
 # ggenerator
 
 ## xgenerator
-[awesome alternative of ggererator](https://github.com/apporoad/xgenerator xg)  
+
+[awesome alternative of ggererator](https://github.com/apporoad/xgenerator "xg")  
 
 ## i wanna tell you that
 1. what is gg(ggenerator)
