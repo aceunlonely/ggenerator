@@ -9,7 +9,9 @@ var path= require('path')
 
 var program = require('commander');
 
-var config =require('peeriocjs').invoke("config").sync.config();
+var cc = require('cli.config.js').system('ggenerator')
+    .default(require('peeriocjs').invoke("config").sync.config())
+var config = cc.get()
 
 var utils = require('./utils')
 
@@ -123,6 +125,7 @@ var getTemaplates = function(tname){
     var rname = null
     var likeNames =[]
     const files = fs.readdirSync(config.templatePackagesDefaultPath)
+    console.log(config.templatePackagesDefaultPath)
     files.forEach(function (item, index) {
         let stat = fs.lstatSync( config.templatePackagesDefaultPath+ '/' + item)
         if (stat.isDirectory() === true) { 
