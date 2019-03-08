@@ -54,7 +54,7 @@ and more in examples:
     all details in doc/*
 
 ## Q&A
-    [QA.md](QA.md)
+[QA.md](QA.md)
 
 
 ## how to share templates Package
