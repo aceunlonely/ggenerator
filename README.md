@@ -53,6 +53,9 @@ and more in examples:
 ## details
     all details in doc/*
 
+## Q&A
+    [QA.md](QA.md)
+
 
 ## how to share templates Package
     use git to share
