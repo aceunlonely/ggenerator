@@ -1,5 +1,3 @@
-var storage = require('mini-dbx')
-var db = storage(__dirname + '/config.json')
 var uicli = require('uicli.js')
 var fs = require('fs')
 var cc = require('cli.config.js').system('ggenerator')
@@ -27,15 +25,6 @@ var getConfig= function(){
     return config
 }
 
-// var config={
-//     workplaceDefaultPath : __dirname + "/workplace",
-//     isTest : false,
-//     renderIgnoreFileTypes : "zip,rar,7z,tar,gz,iso,doc,docx,pdf,wps,odf,png,gif,jpg",
-//     templatePackagesDefaultPath : __dirname + "/templatePackages"
-// }
-
-//console.log('config')
-
 require('peeriocjs').reg("config",getConfig,null,true)
 require('peeriocjs').reg("setConfig",function(){
     var configLust = {
@@ -46,10 +35,5 @@ require('peeriocjs').reg("setConfig",function(){
     }
     var rc = uicli.uiGetJson(configLust).then(data=>{
         cc.set(data)
-        // db.update('config', data, '',function(err,updated){
-        //     if(!err) console.log('config success:' +JSON.stringify(data));
-        // });
     })
 },null,true)
-
-//module.exports= config
