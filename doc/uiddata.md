@@ -1,13 +1,13 @@
 # where is uiddata
 
-|--Config
-    |--index.js
-|--DataObject
-    |--index.json
-    |--uiddata.json
-    |--uiddata.js
-|--FileCollection
-    ..
+|--Config  
+    |--index.js  
+|--DataObject  
+    |--index.json  
+    |--uiddata.json  
+    |--uiddata.js  
+|--FileCollection  
+    ..  
 
 
 # what in uiddata
@@ -52,38 +52,38 @@ var r = function(){
 ```
 
 ## how it work
-uiddata engine will render uiddata.json and run uiddata.js
-uiddata.json: ??? will need your input
-    1. ue(uiddata engine) will ask you like 
-        'pliz input your name: string 这里填写你的名字
-         name : (rue)'
-    2. you can input like(choose one)
-        a.    (string)apporoad  
-        b.    (number)100 
-        c.    (boolean)true
-        d.    (null)null
-        e.    (json){"name":"apporoad","age":100}
-        f.nothing to do ,direct enter
-        PS: 
-    3. you can also input like this:
-        a.  apporoad
-        b.  100
-        c.  true
-        d.  null
-        e.  (json){"name":"apporoad","age":100}
+uiddata engine will render uiddata.json and run uiddata.js  
+uiddata.json: ??? will need your input  
+    1. ue(uiddata engine) will ask you like   
+        'pliz input your name: string 这里填写你的名字  
+         name : (rue)'  
+    2. you can input like(choose one)  
+        a.    (string)apporoad    
+        b.    (number)100   
+        c.    (boolean)true  
+        d.    (null)null  
+        e.    (json){"name":"apporoad","age":100}  
+        f.nothing to do ,direct enter  
+        PS:   
+    3. you can also input like this:  
+        a.  apporoad  
+        b.  100  
+        c.  true  
+        d.  null  
+        e.  (json){"name":"apporoad","age":100}  
 
-        if you wanna input 100、 true 、 null as string
-            you shall input like (string)100
-    4.  you can also use short pattern
-        s:string
-        j:json
+        if you wanna input 100、 true 、 null as string  
+            you shall input like (string)100  
+    4.  you can also use short pattern  
+        s:string  
+        j:json  
 
-    5. then ue will ask you about : age、isMan
-    6. then when ue went @ lover.??? ,it will ask you like 'pliz input your lover.??? key(:ignore or :i means pass this)'
-    7. after you input your key ,then will ask you the value
-    8. then ue will continue ask your key... until you ignore it 
-    9. then went to node : lover.json1
-    10. then be omitted
+    5. then ue will ask you about : age、isMan  
+    6. then when ue went @ lover.??? ,it will ask you like 'pliz input your   lover.??? key(:ignore or :i means pass this)'  
+    7. after you input your key ,then will ask you the value  
+    8. then ue will continue ask your key... until you ignore it   
+    9. then went to node : lover.json1  
+    10. then be omitted  
 
 ## lets try it
-    you can try it @ uicli.js
+you can try it @[uicli.js](https://github.com/aceunlonely/uicli.js)
