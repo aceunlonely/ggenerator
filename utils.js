@@ -2,14 +2,14 @@
 var path = require('path')
 var fs = require('fs')
 
- var startWith=function(str,s){
+var startWith=function(str,s){
     if(s==null||s==""||str.length==0||s.length>str.length)
-     return false;
+        return false;
     if(str.substr(0,s.length)==s)
-       return true;
+        return true;
     else
-       return false;
-   }
+        return false;
+}
 
 // 获取正确的目标地址
 var getRigthTgt= function(workspace,tgt){
@@ -37,6 +37,17 @@ var getRigthTgt= function(workspace,tgt){
         //fs.mkdirSync(path.dirname(tgt));
     }
     return tgt
- }
+}
 
- exports.getRigthTgt = getRigthTgt;
+exports.getRigthTgt = getRigthTgt;
+
+exports.startWith = startWith
+
+exports.endWith = (str,s) => {
+    if(s==null||s==""||str.length==0||s.length>str.length)
+        return false;
+    if(str.substring(str.length-s.length)==s)
+        return true;
+    else
+        return false;
+}

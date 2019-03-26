@@ -3,7 +3,7 @@ require('history.node').record('gg')
 //reg uiddata method
 require('./uiddata')
 //var me = require('./mainEngine')
-var me = require('ggenerator-engine')
+var me = require('./ggenerator-engine')
 var fs = require('fs')
 var path= require('path')
 
@@ -18,7 +18,7 @@ var utils = require('./utils')
 var currentPath = process.cwd()
 //  node run.js -d F:\test\ggenerator/d.zip -p test -t F:\test\ggenerator\tgt
 //get params
-program.version('1.0.0')
+program.version(require('./package.json').version)
     .usage('\r\n\t-p tepmlateName [-d ddata] [-t targetPath] [-w workplace]'
     + '\r\n\t-p tepmlateName [-d ddata] [-t targetPath] [-w workplace] [--debug true]'
     + '\r\n\t-p tepmlateName'
