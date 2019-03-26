@@ -1,35 +1,11 @@
 var fs = require('fs')
 var path =require('path')
 var gu= require('./ggenerator-utils')
-
-
-var isArray = function (object) {
-            return object && typeof object === 'object' &&
-                Array == object.constructor;
-        };
-
-var endWith=function(str,s){
-  if(s==null||s==""||str.length==0||s.length>str.length)
-     return false;
-  if(str.substring(str.length-s.length)==s)
-     return true;
-  else
-     return false;
- }
-
- var startWith=function(str,s){
-  if(s==null||s==""||str.length==0||s.length>str.length)
-   return false;
-  if(str.substr(0,s.length)==s)
-     return true;
-  else
-     return false;
- }
-
+var util = require('./utils')
 
  // 获取正确的目标地址
  var getRigthTgt= function(workspace,tgt){
-    if(startWith(tgt,'../'))
+    if(util.startWith(tgt,'../'))
     {
         //path.basename
         var newWorkspace = path.dirname(workspace)
@@ -81,7 +57,7 @@ var exe =function(fom,env,templateEngine,renderJson){
     //env.tgt = env.tgt.replace(new RegExp("\\","gm"),"/") ;;
     //解析处理
     var array = fom.FOM.NODE
-    if(!isArray(array))
+    if(!util.isArray(array))
         array = fom.FOM
     for(var index in array){
         var node = array[index]
@@ -98,11 +74,11 @@ var exe =function(fom,env,templateEngine,renderJson){
                 var tgt=node["TARGET"] || node["T"]
                 if(!src) throw new Error("fom: when COPYDIR src is not nullable ")
                 if(!tgt) throw new Error("fom: when COPYDIR tgt is not nullable ")
-                if(startWith(src,'./'))
+                if(util.startWith(src,'./'))
                 {
                     src = path.join(env.workspace,src.substr(2))
                 }
-                else if(startWith(src,'$d/'))
+                else if(util.startWith(src,'$d/'))
                 {
                     src = path.join(env.dynamicPath,src.substr(3))
                 }
@@ -126,11 +102,11 @@ var exe =function(fom,env,templateEngine,renderJson){
                 var tgt=node["TARGET"] || node["T"]
                 if(!src) throw new Error("fom: when copy src is not nullable ")
                 if(!tgt) throw new Error("fom: when copy tgt is not nullable ")
-                if(startWith(src,'./'))
+                if(util.startWith(src,'./'))
                 {
                     src = path.join(env.workspace,src.substr(2))
                 }
-                else if(startWith(src,'$d/'))
+                else if(util.startWith(src,'$d/'))
                 {
                     src = path.join(env.dynamicPath,src.substr(3))
                 }

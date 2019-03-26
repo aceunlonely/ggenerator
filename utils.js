@@ -2,7 +2,7 @@
 var path = require('path')
 var fs = require('fs')
 
-var startWith=function(str,s){
+var startWith= (str,s)=>{
     if(s==null||s==""||str.length==0||s.length>str.length)
         return false;
     if(str.substr(0,s.length)==s)
@@ -50,4 +50,19 @@ exports.endWith = (str,s) => {
         return true;
     else
         return false;
+}
+
+exports.isArray = (object) => {
+    return object && typeof object === 'object' &&
+        Array == object.constructor;
+}
+
+exports.in_array = (stringToSearch, arrayToSearch) => {
+    for (s = 0; s < arrayToSearch.length; s++) {
+     thisEntry = arrayToSearch[s].toString();
+     if (thisEntry == stringToSearch) {
+      return true;
+     }
+    }
+    return false;
 }

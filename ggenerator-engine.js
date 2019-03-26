@@ -24,19 +24,11 @@ var parser =  new xml2js.Parser({explicitArray : false, ignoreAttrs : true , asy
  */
 var fomIsInIgnore = function(fom, dDataJson){
     if(dDataJson.tc && dDataJson.tc.fom && dDataJson.tc.fom.ignore){
-        return in_array(fom,dDataJson.tc.fom.ignore)
+        return util.in_array(fom,dDataJson.tc.fom.ignore)
     }
     return false;
 }
-function in_array(stringToSearch, arrayToSearch) {
-    for (s = 0; s < arrayToSearch.length; s++) {
-     thisEntry = arrayToSearch[s].toString();
-     if (thisEntry == stringToSearch) {
-      return true;
-     }
-    }
-    return false;
-}
+
 //compress.unzip('d:/test/test.zip','d:/test/test2')
 
 //get template object
