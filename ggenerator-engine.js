@@ -287,6 +287,8 @@ exports.run =function (params,callback) {
     var iocMainExcutor = function(){
         ioc.invoke("preMainExecuting").preMainExecuting(env).then(mainExcutor).then(function(){
             ioc.invoke("afterMainExecuting").afterMainExecuting(env)
+        }).catch(err=>{
+            console.log('错误信息：' + err)
         })
     }
 
