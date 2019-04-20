@@ -1,8 +1,6 @@
 <div align=center><img src="https://raw.githubusercontent.com/aceunlonely/ggenerator/master/doc/ggenerator.png"/></div>
 
-# ggenerator
-
-[english readme](./readme_en.md)
+[english readme here](./readme_en.md)
 
 1. ggenerator 是一个代码生成引擎，核心是根据动态数据和模板生成需要的文件集合
 2. ggenerator通过fom（file object model文件对象模型) 描绘对文件的操作
@@ -22,6 +20,9 @@
 npm i ggenerator.js -g
 
 gg -h
+
+# get empty template
+gg empty
 
 cd /templates  # template root dir 模板根目录
 
