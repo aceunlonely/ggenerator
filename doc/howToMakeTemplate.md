@@ -1,4 +1,7 @@
+demo in [ggenerator-templates](https://github.com/aceunlonely/ggenerator-templates)
+
 ## make the dir (like templatePackages/test) like
+
 ```bash
 |--Config
     |--index.json
