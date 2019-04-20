@@ -61,10 +61,4 @@ details @ [doc/uiddata.md](doc/uiddata.md)
 
 
 ## how to share templates Package
-use git to share  
-```bash
-git clone https://github.com/aceunlonely/ggenerator-templates
-cd ggenerator-templates
-gg config
-```
-
+here is [public templages](https://github.com/aceunlonely/ggenerator-templates)
