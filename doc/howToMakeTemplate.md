@@ -1,4 +1,5 @@
 ## make the dir (like templatePackages/test) like
+```bash
 |--Config
     |--index.json
 |--Ext
@@ -7,110 +8,46 @@
     ..
 |--Workspace
     ..
-
-
+```
 
 ## Config/index.json 
-    {
-    "version" : "0.0.1",
-    "company" : "超级高手集合"
-    }
+```json
+{
+"version" : "0.0.1",
+"company" : "超级高手集合"
+}
+```
 
-## Ext/index.js  is for ext for engine
-    // should be a map
-    var _templateEngineExt= {};
+## Ext/index.js  is for ext for engine  扩展方法
+```js
+// should be a map
+var _templateEngineExt= {};
+
+// ext functions 扩展函数，模板中使用
+_templateEngineExt.firstLowerCase = function(A){
+    return A.replace(/(\w)/,function(v){return v.toLowerCase()});
+}
+
+...
+
+// this is for templateEngine Ext to register
+exports.templateEngineExt = _templateEngineExt;
+```
 
 
-    _templateEngineExt.firstLowerCase = function(A){
-        return A.replace(/(\w)/,function(v){return v.toLowerCase()});
-    }
-
-    // this is for templateEngine Ext to register
-    exports.templateEngineExt = _templateEngineExt;
-
-
-## TemplateFiles/*   is for ref file  
+## TemplateFiles/*   is for ref file   被引用文件
     in this dir, you can put any files, all files can be used in a fom file
     you can also put fom in this dir
+    在这个文件夹中，可以防止任何文件，不会被生成，但能被fom中定义的节点操作
+    你也可以将fom文件放在这里
 
-## Workspace/*   is for workplace
+## Workspace/*   is for workplace  工作目录
     you can put any files in it, and we will generate form this files
     if the file is a pom file ,we will execute it by fom meaning
     finally ,we will render all files
-
-## how to make fom file
-    <?xml version="1.0" encoding="UTF-8" ?>
-    <FOM>
-        {@each ddata.gf as g, index}
-        <NODE>
-        <SOURCE>gf.txt</SOURCE>
-        <TARGET>${g.name}.txt</TARGET>
-        <DATA>ddata.gf[${index}]</DATA>
-        </NODE>
-        {@/each}
-         <NODE>
-        <SOURCE>gf.fom</SOURCE>
-        <TARGET>gf/gf.fom</TARGET>
-        </NODE>
-        <NODE>
-            <SOURCE>hobby.fom</SOURCE>
-            <TARGET>hobby/hobby.fom</TARGET>
-        </NODE>
-        <NODE>
-            <SOURCE>./readme.md</SOURCE>
-            <TARGET>readme_${ddata.name}.md</TARGET>
-            <OPERATE>RENAME</OPERATE>
-        </NODE>
-
-        <NODE>
-            <SOURCE>$d/addFile.txt</SOURCE>
-            <TARGET>addFile.txt</TARGET>
-            <OPERATE>COPY</OPERATE>
-        </NODE>
-        <NODE>
-        <SOURCE>$d/import.xls</SOURCE>
-        <TARGET>templates/import.xls</TARGET>
-        </NODE>
-        <NODE>
-        <TARGET>del.xls</TARGET>
-        <OPERATE>DELETE</OPERATE>
-        </NODE>
-        <NODE>
-        <SOURCE>./orgin.xls</SOURCE>
-        <TARGET>new.xls</TARGET>
-        <OPERATE>RENAME</OPERATE>
-    </FOM>
+    这个目录是放置目标文件的，所有的文件都会生成到最终文件夹中，文本文档会被模板引擎渲染为最终文件
+    而fom，会被解析，生成动态文件
 
 
-    you can make a dynamic fom by template pattern 
 
-    <SOURCE>gf.txt</SOURCE>  means gf.txt from TemplateFiles dir by operation COPY , when operation is RENAME or DELETE means from Workspace
-    <OPERATE>RENAME</OPERATE>  means operation is rename(COPY,DELETE,RENAME,COPYDIR) , copy is default operation
-        OPERATES:
-            COPY(C for short):  child NODE 'SOURCE'(S) 'TARGET'(T) is need,  
-                SOURCE can be start with './'，'$d/' or ''
-                    './' means find your file in current workspace
-                    '$d/' means find your file in dynamicPath
-                    '' means find your file in templatePath
-                TARGET can be start with '../' or ''
-                    '../' means previous directory on the path of fom
-                    '' means the root dir of workspace
-            DELETE(D for short): child NODE 'TARGET'(T) is need
-            RENAME(R for short): child NODE 'SOURCE'(S) 'TARGET'(T) is need
-            COPYDIR(CD for short): just like COPY
-
-    <SOURCE>$d/import.xls</SOURCE> means import.xls from ddate/FileCollection 
-    <SOURCE>./orgin.xls</SOURCE>  means orgin.xls from real Workspace dir
-
-
-PS: template engine object has these objects (use like :${ddata.name} )
-        data :  data is an object from <DATA>
-        tConfig : tConfig is an object from template's Config dir, we load it via require('templatePath/Config')
-        tc:  tc is short for tConfig
-        dConfig : dConfig is an object from dynamic's Config dir, we load it via require('DDataPath/Config')
-        dc : dc is short for dConfig
-        ddata: dConfig is an object from dynamic's Config dir, we load it via require('DDataPath/DataObject')
-        d : d is short for ddate
-
-        data.orignString : data.orignString is the string value from <DATA>
-        data.toString :  data.toString === data.orignString 
+​    
